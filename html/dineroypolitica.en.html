@@ -1,0 +1,63 @@
+
+<h3>Visualization Experiments.</h3>
+<h3>Money and political networks.</h3>
+
+<div>
+  <img class="iconito" src="img/iconos/wrench-b.png"></img>
+  <code>d3</code>
+  <code>javascript</code>
+</div>
+
+<iframe width="500" height="500" scrolling="no" frameborder="0" allowtransparency="true" src="http://christianparsons.com.ar/lab/political_networks/"></iframe>
+
+<div><a href="https://github.com/chparsons/vizlab/tree/master/political_networks" target="_blank"><p>https://github.com/chparsons/vizlab/tree/master/political_networks<p></a></div>
+
+<p>How are our representative democracies working in different parts of the world? How much democratic and representative are they if they depend on funding with highly concentrated origins? By whom and for whom are these democracies working?</p>
+
+<p>This is a prototype for a visualization of the political and financial networks in Argentina. It's based on accountings submitted by political parties and electoral alliances. Here you can see 3 types of agents related:</p>
+
+<div>
+  <ul>
+    <li><p>Private Contributors</p></li>
+    <ul>
+      <li><p><span style="background-color:rgb(106,168,79)">People</span></p></li>
+      <li><p><span style="background-color:rgb(61,133,198)">Companies</span></p></li>
+    </ul>
+    <li><p>Money Receivers</p></li>
+    <ul>
+      <li><p><span style="background-color:rgb(230,145,56)">Political Groups</span></p></li>
+    </ul>
+  </ul>
+</div>
+
+<p>Data comes from Contributions and Private Donations in CSV format from <a href="http://datospublicos.org/package/dinero-y-politica" target="_blank">datospublicos.org</a> which has data from 2007, 2009 and 2011 of campaigns in Argentina. Thanks to <a href="http://dineroypolitica.org/" target="_blank">dineroypolitica.org</a> for making the data available.</p>
+
+<br>
+
+<p>This is a protoype. There's a lot to fix and improve. Currently the network displays elections data in the whole country in all available years. It's not showing data by region nor by year. Data is being filtered to display the 400 bigger nodes for technical reasons.</p>
+
+<p>It's interesenting to note how certain nodes/contributors contribute to different groups working as links between other nodes. These connectors are key to form clusters.</p>
+
+<p>It's also interesting how is the funding structure of the parties, looking at quantities as well as types of funding, i.e. what are the proportions of personal based and company based funds.</p>
+
+<p>If you leave your mouse on a node, the name will appear as a tooltip. You can also click on a node to make a google search with its name. The size of the node represents the total amount of money contributed by the person or company to one or more political organizations.</p>
+
+<br>
+<code>[[ TODO ]]</code>
+<br>
+<p>Better visual cues. Data checking. Add user parameters to filter by region, dates, quantities, etc...</p>
+
+<br>
+<br>
+
+<p>...and here's a TED talk by Lawrence Lessig about these issues in USA</p>
+
+<blockquote>
+  <p>There is a corruption at the heart of American politics, caused by the dependence of Congressional candidates on funding from the tiniest percentage of citizens. That's the argument at the core of this blistering talk by legal scholar Lawrence Lessig. With rapid-fire visuals, he shows how the funding process weakens the Republic in the most fundamental way, and issues a rallying bipartisan cry that will resonate with many in the U.S. and beyond.</p>
+  <small>Lawrence Lessig in <cite>We the People, and the Republic we must reclaim</cite></small>
+</blockquote>
+
+<p><a href="http://letsfreecongress.org/" target="_blank">http://letsfreecongress.org/</a></p>
+
+<iframe src="http://embed.ted.com/talks/lang/es/lawrence_lessig_we_the_people_and_the_republic_we_must_reclaim.html" width="560" height="315" frameborder="0" scrolling="no" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+
