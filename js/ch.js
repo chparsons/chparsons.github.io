@@ -1,5 +1,5 @@
 
-(function($,_,window,document) {
+(function($,_,window,document,undefined) {
 
 var ch = {};
 
@@ -75,5 +75,5 @@ ch.url_params = function( url, sep )
 
 window.ch = ch;
 
-})(jQuery,_,window,document);
+})(jQuery,_,window,document,undefined);
 

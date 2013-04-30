@@ -168,6 +168,7 @@ function intro_out()
 
 function section_in( section )
 {
+  _gaq.push([ '_trackPageview', location.href ]);
   section.enter();
   $data.show();
   parse_sections_links( $data ); 
