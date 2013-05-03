@@ -15,6 +15,7 @@ function init()
   $sidebar = $('.sidebar');
 
   //$flattr = $('.FlattrButton');
+  $('iframe[id*="coinbase_button"]').hide();
 
   init_sections();
 
