@@ -5,14 +5,16 @@ var sections;
 var cur; 
 
 var $data, $thumbs, $sidebar;
-var $flattr;
+
+//var $flattr;
 
 function init() 
 {
   $data = $('.data');
   $thumbs = $('.thumbsbox');
   $sidebar = $('.sidebar');
-  $flattr = $('.FlattrButton');
+
+  //$flattr = $('.FlattrButton');
 
   init_sections();
 
@@ -163,7 +165,9 @@ function intro_out()
   $thumbs.hide();
   //$sidebar.find('.home-ico').hide();
   //$sidebar.find('.back-ico').show();
-  $flattr.hide();
+
+  //$flattr.hide();
+  $('iframe[id*="coinbase_button"]').hide();
 }
 
 function section_in( section )
@@ -172,7 +176,9 @@ function section_in( section )
   section.enter();
   $data.show();
   parse_sections_links( $data ); 
-  $flattr.show();
+
+  //$flattr.show();
+  $('iframe[id*="coinbase_button"]').show();
 }
 
 function goto( id ) 

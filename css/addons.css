@@ -1,10 +1,16 @@
 
-.FlattrButton {
-  /*position:fixed;*/
+iframe[id*="coinbase_button"] {
   position: relative;
   left: 90px;
-  bottom: 10px;  
+  /*bottom: 10px;*/
 }
+
+/*.FlattrButton {*/
+  /*[>position:fixed;<]*/
+  /*position: relative;*/
+  /*left: 250px;*/
+  /*bottom: 20px;  */
+/*}*/
 /*.FlattrButton p {*/
   /*color: #fff;*/
   /*font-family: verdana;*/
