@@ -38,6 +38,8 @@ function init()
   window.onhashchange = function()
   {
     var d = parse_url();
+    if ( d.section === cur )
+      return;
     ( set_lang( d.lang ) || set_lang(deflang) );
     goto( d.section );
   };
@@ -116,7 +118,17 @@ function init_sections()
 
   sections.on( 'intro:enter', function() 
   { 
-    intro_in();    
+    intro_enter();    
+  });
+
+  sections.on( 'camara_lucida:enter', function() 
+  { 
+    $('.towtruck.btn').hide(); 
+  });
+
+  sections.on( 'camara_lucida:exit', function() 
+  { 
+    $('.towtruck.btn').show(); 
   });
 
   parse_sections_links( $sidebar ); 
@@ -125,7 +137,9 @@ function init_sections()
 
 function parse_sections_links( $el )
 {
-  //console.log('===parse_sections_links',$el.attr('class') );
+  //console.log(
+    //'===parse_sections_links',
+    //$el.attr('class') );
  
   $el.find('a[href^="#"]').each( 
     function(i) 
@@ -154,15 +168,19 @@ function parse_sections_links( $el )
   //}
 }
 
-function intro_in()
+function intro_enter()
 {
   $thumbs.show();
   //$sidebar.find('.home-ico').show();
   //$sidebar.find('.back-ico').hide();
 }
 
-function intro_out()
+function section_exit( section )
 {
+  //console.log( 'exit', section.id() )
+
+  section.exit();
+
   $thumbs.hide();
   //$sidebar.find('.home-ico').hide();
   //$sidebar.find('.back-ico').show();
@@ -171,11 +189,14 @@ function intro_out()
   $('iframe[id*="coinbase_button"]').hide();
 }
 
-function section_in( section )
+function section_enter( section )
 {
   _gaq.push([ '_trackPageview', location.href ]);
+
   section.enter();
+
   $data.show();
+
   parse_sections_links( $data ); 
 
   //$flattr.show();
@@ -187,9 +208,13 @@ function goto( id )
   //console.log('goto', id);
 
   if ( cur )
+  {
     $sidebar.find('a[href*="'+cur+'"]')
       .parent()
       .removeClass('active');
+
+    section_exit( sections.get(cur) );    
+  }
 
   id = id || 'intro';
 
@@ -205,12 +230,10 @@ function goto( id )
     .parent()
     .addClass('active');
 
-  intro_out();    
-
   $data.empty();
   $data.load( section.url(), function() 
   {
-    section_in( section ); 
+    section_enter( section ); 
   });
 }
 
@@ -248,7 +271,7 @@ function Section( id, opt, bus )
 
   opt = opt || {};
 
-  //this.id = function() { return id; }
+  this.id = function() { return id; }
   //this.config = function() { return opt; }
 
   this.url = function() { 
@@ -259,6 +282,12 @@ function Section( id, opt, bus )
   {
     bus.trigger('section:enter', { section: id });
     bus.trigger( id+':enter' );
+  };
+
+  this.exit = function() 
+  {
+    bus.trigger('section:exit', { section: id });
+    bus.trigger( id+':exit' );
   };
 }
 
