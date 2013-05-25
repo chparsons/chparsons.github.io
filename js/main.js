@@ -15,7 +15,7 @@ function init()
   $sidebar = $('.sidebar');
 
   //$flattr = $('.FlattrButton');
-  $('iframe[id*="coinbase_button"]').hide();
+  //$('iframe[id*="coinbase_button"]').hide();
 
   init_sections();
 
@@ -186,7 +186,7 @@ function section_exit( section )
   //$sidebar.find('.back-ico').show();
 
   //$flattr.hide();
-  $('iframe[id*="coinbase_button"]').hide();
+  //$('iframe[id*="coinbase_button"]').hide();
 }
 
 function section_enter( section )
@@ -200,7 +200,7 @@ function section_enter( section )
   parse_sections_links( $data ); 
 
   //$flattr.show();
-  $('iframe[id*="coinbase_button"]').show();
+  //$('iframe[id*="coinbase_button"]').show();
 }
 
 function goto( id ) 
