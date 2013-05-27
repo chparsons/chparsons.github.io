@@ -1,9 +1,9 @@
 
-/*iframe[id*="coinbase_button"] {*/
-  /*position: relative;*/
-  /*left: 90px;*/
-  /*[>bottom: 10px;<]*/
-/*}*/
+iframe[id*="coinbase_button"] {
+  position: relative;
+  left: 90px;
+  /*bottom: 10px;*/
+}
 
 /*.FlattrButton {*/
   /*[>position:fixed;<]*/
