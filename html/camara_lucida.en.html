@@ -12,7 +12,7 @@
   <img class="iconito" src="img/iconos/wrench-b.png"></img>
   <code>c++</code>
   <code>openframeworks</code>
-  <code>kinect</code>
+  <code>openkinect</code>
 </div>
 
 <br><br>
@@ -26,56 +26,56 @@
   <cite>Fernando Pessoa</cite>
 </blockquote>
 
-<strong><a href="http://www.camara-lucida.com.ar/" target="_blank">http://www.camara-lucida.com.ar/</a></strong>
-
-<br><br>
+<br>
 
 <p>
-Camara Lucida explores the design and creation of computational artifacts that bridge the digital and physical worlds to make tools for the development of human creativity, expression, computational thinking and learning.
+<strong>Camara Lucida</strong> is an open-source software toolkit for artists, programmers and designers to make ludic interfaces and digital artifacts based on real-time projection mapping on physical objects.
 </p>
 
 <p>
-The project is based on the creation of digital construction kits that combine agent-based modeling and swarm intelligence with physical building blocks. Simulations of autonomous agents are projected on top of objects using 3d camera-projector technology.
+It uses a 3d Camera-Projector system with a RGBD camera (a kinect) to make a 3d representation of the scene and project graphics on top of physical objects in real-time.
 </p>
+
+<br>
+
+<!--<p><a href="#camara_lucida/workshop">workshop</a></p>-->
+
+<br>
+
+<p><strong>Calibration module:</strong></p>
+<p><a href="https://github.com/chparsons/rgbdemo" target="_blank">RGBDemo</a></p>
 
 <p>
-Research is driven by prototyping playgrounds for people to tinker with complex adaptive processes through the construction of 3d structures in space with their own hands.
+It's based on the open-source projects RGBDemo by Nicolas Burrus and OpenCV. It calibrates the projector-camera system and saves the data for further usage.
 </p>
+
+<p><a href="#camara_lucida/tutorials/calib">Calibration tutorial</a></p>
+
+<br>
+
+<p><strong>Render module:</strong></p>
+<p><a href="https://github.com/chparsons/ofxCamaraLucida" target="_blank">ofxCamaraLucida (openframeworks addon)</a></p>
 
 <p>
-The goal is to make learning tools to enable physical, ludic and creative exploration of concepts related to agent-based systems and swarm intelligence, such as self-organization, emergence, decentralization, collective behaviors, non-linearity, networks, evolution and adaptation. 
+mapping is achieved by projecting the graphics render from the projector viewpoint.
 </p>
+<ul>
+  <li>loads the calibration data</li>
+  <li>performs the set up of the graphics framework to render from the projector point of view</li>
+  <li>makes a 3d mesh from a depth map (the depth map is fed by the custom application, so camera capture is decoupled)</li>
+  <li>renderd to a texture on the 3d mesh (the texture contains the custom application graphics).</li>
+</ul>
 
-<br><br>
+<br>
+
+<p>
+made by
+<a href="http://www.chparsons.com.ar/">Christian Parsons</a>
+,
+<a href="http://www.tc.umn.edu/~mhtepper/" target="_blank">Mariano Tepper</a>
+</p>
 
 <img src="img/camara_lucida/cml_intro.jpg"></img>
-
-<br><br>
-
-<blockquote>
-  <p>"I believe that the only kind of science computing can be is like the science of bridge building. Somebody has to build the bridges and other people have to tear them down and make better theories, and you have to keep on building bridges."</p>
-  <cite>Alan kay</cite>
-</blockquote>
-
-<img src="img/camara_lucida/cml_kit_bridges_1.jpg"></img>
-
-<img src="img/camara_lucida/cml_kit_bridges_5.jpg"></img>
-
-<br><br><br>
-
-<p><strong>
-The project has two branches:
-</strong></p>
-
-<ul>
-<li><p>
-Technology: development of a open-source software toolkit for artists, programmers and designers to make ludic interfaces and digital artifacts based on real-time projection mapping on physical objects. It uses a 3d Camera-Projector System to make a 3d representation of the scene and project graphics. https://github.com/chparsons
-</li></p>
-
-<li><p>
-Interaction Design: what kinds of digital artifacts can be made with this tool, being design, art works, games, toys, learning tools, ...? How are the creative processes geared by the tool? What kind of interactions can be designed?
-</li></p>
-</ul>
 
 <br><br>
 
@@ -88,6 +88,12 @@ Interaction Design: what kinds of digital artifacts can be made with this tool, 
 <iframe width="420" height="315" src="http://www.youtube.com/embed/wVAxEYrtsBA" frameborder="0" allowfullscreen></iframe>
 
 <br><br><br>
+
+<p>
+...what kinds of digital artifacts can be made with this tool, being design, art works, games, toys, learning tools, ...? How are the creative processes geared by the tool? What kind of interactions can be designed?
+</p>
+
+<br>
 
 <p><strong>Built with Cámara Lúcida: <a href="#afluentes">Afluentes</a></strong></p>
 
