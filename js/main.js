@@ -15,7 +15,7 @@ function init()
   $sidebar = $('.sidebar');
 
   //$flattr = $('.FlattrButton');
-  $('iframe[id*="coinbase_button"]').hide();
+  //$('iframe[id*="coinbase_button"]').hide();
 
   init_sections();
 
@@ -116,9 +116,22 @@ function init_sections()
     );
   }); 
 
+  sections.on( 'section:enter', function( e ) 
+  { 
+    enter_section( e.section ); 
+  });
+
+  sections.on( 'section:exit', function( e ) 
+  { 
+    exit_section( e.section ); 
+  });
+
   sections.on( 'intro:enter', function() 
   { 
-    intro_enter();    
+    $thumbs.show();
+    $('iframe[id*="coinbase_button"]').hide();
+    //$sidebar.find('.home-ico').show();
+    //$sidebar.find('.back-ico').hide();    
   });
 
   sections.on( 'camara_lucida:enter', function() 
@@ -131,8 +144,62 @@ function init_sections()
     $('.towtruck.btn').show(); 
   });
 
+  //::::::::::::::::::::::::::::::::::::::::::::
+  //TODO show coinbase.....do it well......
+  sections.on( 'donate:enter', function() 
+  { 
+    $('iframe[id*="coinbase_button"]').show();
+  });
+  sections.on( 'camara_lucida:enter', function() 
+  { 
+    $('iframe[id*="coinbase_button"]').show();
+  });
+  sections.on( 'dineroypolitica:enter', function() 
+  { 
+    $('iframe[id*="coinbase_button"]').show();
+  });
+  sections.on( 'afluentes:enter', function() 
+  { 
+    $('iframe[id*="coinbase_button"]').show();
+  });
+  sections.on( 'terra_incognita:enter', function() 
+  { 
+    $('iframe[id*="coinbase_button"]').show();
+  });
+  sections.on( 'cloud_chamber:enter', function() 
+  { 
+    $('iframe[id*="coinbase_button"]').show();
+  });
+  //::::::::::::::::::::::::::::::::::::::::::::
+
   parse_sections_links( $sidebar ); 
   parse_sections_links( $thumbs ); 
+}
+
+function enter_section( section ) 
+{
+  //console.log( 'enter', section );
+
+  _gaq.push([ '_trackPageview', location.href ]);
+
+  //$flattr.show();
+  //$('iframe[id*="coinbase_button"]').show();
+
+  $data.show();
+
+  parse_sections_links( $data );
+}
+
+function exit_section( section ) 
+{
+  //console.log( 'exit', section );
+
+  //$flattr.hide();
+  $('iframe[id*="coinbase_button"]').hide();
+
+  $thumbs.hide();
+  //$sidebar.find('.home-ico').hide();
+  //$sidebar.find('.back-ico').show();
 }
 
 function parse_sections_links( $el )
@@ -168,41 +235,6 @@ function parse_sections_links( $el )
   //}
 }
 
-function intro_enter()
-{
-  $thumbs.show();
-  //$sidebar.find('.home-ico').show();
-  //$sidebar.find('.back-ico').hide();
-}
-
-function section_exit( section )
-{
-  //console.log( 'exit', section.id() )
-
-  section.exit();
-
-  $thumbs.hide();
-  //$sidebar.find('.home-ico').hide();
-  //$sidebar.find('.back-ico').show();
-
-  //$flattr.hide();
-  $('iframe[id*="coinbase_button"]').hide();
-}
-
-function section_enter( section )
-{
-  _gaq.push([ '_trackPageview', location.href ]);
-
-  section.enter();
-
-  $data.show();
-
-  parse_sections_links( $data ); 
-
-  //$flattr.show();
-  $('iframe[id*="coinbase_button"]').show();
-}
-
 function goto( id ) 
 {
   //console.log('goto', id);
@@ -213,7 +245,7 @@ function goto( id )
       .parent()
       .removeClass('active');
 
-    section_exit( sections.get(cur) );    
+    sections.get(cur).exit();
   }
 
   id = id || 'intro';
@@ -233,7 +265,7 @@ function goto( id )
   $data.empty();
   $data.load( section.url(), function() 
   {
-    section_enter( section ); 
+    section.enter();
   });
 }
 
