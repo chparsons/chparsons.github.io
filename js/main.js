@@ -17,8 +17,6 @@ function init()
   //$flattr = $('.FlattrButton');
   $('iframe[id*="coinbase_button"]').hide();
 
-  //$('.coinbase-button').after('<script src="https://coinbase.com/assets/button.js" type="text/javascript"></script>');
-
   init_sections();
 
   var deflang = 'ar';
