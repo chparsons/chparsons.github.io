@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
+
+<head>
+  <title>Infomous Screen Capture Test</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+</head>
+
+<body>
+<script type="text/javascript">
+	var nid78 = {
+		width: "600",
+		height: "400"
+	};
+	
+	function capture(){
+		var cloud = Infomous.clouds.get();
+		cloud.capture();
+		
+		cloud.on("infomous_capture", function(e) { 
+        console.log('infomous caputred',e);
+		    var img = document.getElementById('cap_img');
+		    img.setAttribute("width", e.image_width);
+		    img.setAttribute("height", e.image_height);
+		    img.setAttribute("src", "data:text/plain;base64,"+e.image_data);
+		 } );
+	}
+	
+
+	
+</script>
+
+<!--<script type="text/javascript" async data-infomous-id="nid78" src="http://dev3.infomous.com/client2/"></script>-->
+<script type="text/javascript" async data-infomous-id="chInfomousCloud" src="https://crimson.infomous.com/1.27.1/client2/"></script>
+<br/>
+<div>
+    <a href="javascript:void(0);" onclick="capture();">CAPTURE CLOUD</a>
+</div>
+<div id="output">
+	<img id="cap_img" title="capture" />
+</div>
+
+</body>
+
+</html>
