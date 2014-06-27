@@ -1,5 +1,5 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" dir="ltr">
+<!DOCTYPE html>
+<html>
 
 <head>
   <title>Infomous Screen Capture Test</title>
@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script type="text/javascript">
 
   var chInfomousCloud = {"width":750,"height":600,"maxWords":45,"linkageThreshold":2.2,"setFrame":false,"setControlBar":true,"setControls":"fontSlider,zoomSlider,linksSlider,wordsSlider,groups,fullscreen,focusSelect","setHideControlBar":false,"feeds":"https://qa.crimsonhexagon.com/ch/infomous/rssDocs?request=id%3D286443612%26…382B5B2C2-n1.qaweb-01%26totalPosts%3D1000%26tags%3D0%26postListSize%3D1000","textOption":"TITLE_AND_DESCRIPTION","hidden":"","setCaptureTarget":"https://qa.crimsonhexagon.com/ch/opinion/export?export=CLUSTERS_VIZ&format=PNG&id=286443612&start=2013-07-09&end=2014-04-18&postListSize=1000","skinEmbedWordFont":false,"api":true,"setJSCallOnFocus":true,"setInteractionMode":"hover","setMinutesToReload":300,"setDemoMode":false,"wmode":"opaque"};
@@ -22,11 +23,21 @@
 		cloud.capture();
 		
 		cloud.on("infomous_capture", function(e) { 
+
         console.log('infomous caputred',e);
+
 		    var img = document.getElementById('cap_img');
 		    img.setAttribute("width", e.image_width);
 		    img.setAttribute("height", e.image_height);
 		    img.setAttribute("src", "data:text/plain;base64,"+e.image_data);
+
+        var $a = $('<a/>', {
+          download: 'infomous_capture.'+e.image_type,
+          href: 'data:application/octet-stream;base64,'+e.image_data,
+        }).appendTo('body');
+        $a[0].click();
+        $a.remove();
+
 		 } );
 	}
 	
@@ -35,10 +46,12 @@
 </script>
 
 <!--<script type="text/javascript" async data-infomous-id="nid78" src="http://dev3.infomous.com/client2/"></script>-->
-<script type="text/javascript" async data-infomous-id="chInfomousCloud" src="https://crimson.infomous.com/1.27.1/client2/"></script>
+<!--<script type="text/javascript" async data-infomous-id="chInfomousCloud" src="https://crimson.infomous.com/1.27.1/client2/"></script>-->
+<script type="text/javascript" async data-infomous-id="chInfomousCloud" src="http://crimson.infomous.com/trunk/client2/"></script>
 <br/>
 <div>
     <a href="javascript:void(0);" onclick="capture();">CAPTURE CLOUD</a>
+    <a href="http://www.w3schools.com/images/myw3schoolsimage.jpg" download="w3logo">pepepep</a>
 </div>
 <div id="output">
 	<img id="cap_img" title="capture" />
