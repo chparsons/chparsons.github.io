@@ -8,11 +8,7 @@
   <code>javascript</code>
 </div>
 
-<iframe width="500" height="500" scrolling="no" frameborder="0" allowtransparency="true" src="lab/politic_nets/index.html"></iframe>
-
-<div><a href="https://github.com/chparsons/vizlab/tree/master/political_networks" target="_blank"><p>https://github.com/chparsons/vizlab/tree/master/political_networks<p></a></div>
-
-<p>Cómo funcionan hoy las democracias representativas en distintas partes del mundo? Cuán democráticas y cuán representativas son si dependen de fuentes de finanaciamiento altamente concentradas? Por quiénes y para quiénes están hechas estas democracias?</p>
+<br>
 
 <p>Este es un prototipo para una visualización de las redes financieras de campañas políticas en Argentina. Está basado en las cuentas registradas por los partidos políticos. En la visualización se pueden ver 3 tipos de agentes relacionados:</p>
 
@@ -20,27 +16,37 @@
   <ul>
     <li><p>Contribuyentes privados</p></li>
     <ul>
-      <li><p><span style="background-color:rgb(106,168,79)">Personas</span></p></li>
-      <li><p><span style="background-color:rgb(61,133,198)">Empresas</span></p></li>
+      <li><p><span style="background-color:#e7298a">Personas</span></p></li>
+      <li><p><span style="background-color:#66a61e">Empresas</span></p></li>
     </ul>
     <li><p>Receptores de fondos</p></li>
     <ul>
-      <li><p><span style="background-color:rgb(230,145,56)">Agrupaciones políticas</span></p></li>
+      <li><p><span style="background-color:#e6ab02">Agrupaciones políticas</span></p></li>
     </ul>
   </ul>
 </div>
 
-<p>Los datos provienen de las Contribuciones y Donaciones Privadas en formato CSV obtenido de <a href="http://datospublicos.org/package/dinero-y-politica" target="_blank">datospublicos.org</a> que contiene datos de 2007, 2009 y 2011 de campañas en Argentina. Gracias a <a href="http://dineroypolitica.org/" target="_blank">dineroypolitica.org</a> por hacer que estos datos estén disponibles.</p>
+<br>
+
+<p>Cada visualización muestra los 400 contribuyentes más grandes.</p>
+<p>El tamaño de los nodos representa el monto total contribuído por una persona o empresa a una o más organizaciones políticas.</p>
+<p>Click sobre un node para más información.</p>
 
 <br>
 
-<p> Esto es un prototipo. Hay mucho por arreglar y mejorar. Ahora la red muestra las elecciones de todo el país en todos los años disponibles. No se diferencia por región ni por año. Está filtrado para que aparezcan solamente los 400 contribuyentes más grandes por una cuestión técnica.</p>
+<iframe width="800" height="1100" scrolling="no" frameborder="0" allowtransparency="true" src="lab/politic_nets/index.html"></iframe>
 
-<p>Es interesante ver cómo hay ciertos nodos/contribuyentes que aportan a diferentes agrupaciones y funcionan como conectores entre nodos/receptores. Estos conectores son clave en la formación de clusters.</p>
+<p>Cómo funcionan hoy las diferentes democracias representativas? Cuán democráticas y cuán representativas son si dependen de fuentes de finanaciamiento altamente concentradas? Por quiénes y para quiénes están hechas estas democracias? Estamos viviendo más en plutocracia que en democracia?</p>
 
-<p>También es interesante ver cómo son los fondos de cada agrupación por cantidad pero también por tipo, o sea en qué proporciones los fondos provienen de personas o de empresas.</p>
+<br>
 
-<p>Si se deja el mouse sobre un nodo va a aparecer el nombre como ayuda. También se puede hacer click sobre un nodo y abrirá una nueva ventana con una búsqueda de google. El tamaño de los nodos representan el monto total de dinero aportado por la persona o empresa a una o más organizaciones políticas.</p>
+<p> Siendo un prototipo hay mucho por arreglar y mejorar.</p>
+
+<p>Es interesante ver cómo se revela la composición de financiamiento político, la estructura y la distribución de empresas/personas.</p>
+
+<p>Además del análisis cualitativo, a nivel cuantitativo se revela también la relación directa entre cantidad de dinero disponible para las agrupaciones y los resultados de las elecciones.</p>
+
+<p>Es interesante también cómo ciertos nodos contribuyen a diferentes grupos haciendo de links entre differentes clusters.</p>
 
 <br>
 <code>[[ TODO ]]</code>

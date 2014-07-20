@@ -73,6 +73,14 @@ ch.url_params = function( url, sep )
   return params;
 }
 
+ch.loadjs = function( url )
+{
+  var node = document.createElement('script');
+  node.setAttribute("type","text/javascript");
+  node.setAttribute("src", url);
+  document.getElementsByTagName("head")[0].appendChild(node);
+}
+
 window.ch = ch;
 
 })(jQuery,_,window,document,undefined);
