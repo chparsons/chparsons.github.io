@@ -19,7 +19,7 @@ function init()
 
   init_sections();
 
-  var deflang = 'ar';
+  var deflang = 'en';
   var d = parse_url();
 
   if ( set_lang( d.lang ) )
