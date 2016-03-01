@@ -84,15 +84,17 @@ function set_lang( str )
 
 function load_lang( callback ) 
 {
-  /*
-   * http://www.hostip.info/use.html
-   */
-  $.ajax({ 
-    url: 'http://api.hostip.info/country.php',
-    //url: 'http://x.x', 
-    type: 'GET',
-    timeout: 3000
-  }).done( callback ).fail( callback );
+    $.ajax({ 
+        url: '//ipinfo.io',
+        //url: 'http://api.hostip.info/country.php',
+        type: 'GET',
+        dataType: "json",
+        timeout: 3000
+    })
+    .done(function(res) {
+        callback( res.country );
+    })
+    .fail( callback );
 }
 
 function init_sections() 
