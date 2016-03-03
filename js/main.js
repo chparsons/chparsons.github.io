@@ -283,6 +283,7 @@ function Sections()
 
   this.add = function( id, opt )
   {
+    if (!id) return null;
     ls[id] = new Section( id, opt, this );
     return ls[id];
   };
