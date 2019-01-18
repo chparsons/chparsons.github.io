@@ -27213,7 +27213,7 @@ var remove_filtered_node = function remove_filtered_node(node_id, state) {
   });
 
   if (!d) return;
-  var text = el.search_node.node().value.split(',').filter(function (t) {
+  var text = el.search_node.node().value.split(',').map(_lodash.default.trim).filter(function (t) {
     return !_lodash.default.isEmpty(t);
   });
 
@@ -27234,7 +27234,7 @@ var remove_filtered_node = function remove_filtered_node(node_id, state) {
     return _lodash.default.toLower(d.label).indexOf(t.toLowerCase()) > -1;
   });
 
-  el.search_node.node().value = text.join(',');
+  el.search_node.node().value = text.join(', ');
 };
 
 var clear_filtered_nodes = function clear_filtered_nodes(map_data, state, update_render) {
