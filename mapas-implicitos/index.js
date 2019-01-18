@@ -26571,11 +26571,40 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /*
-hover metric -> resize nodes
 drag metric -> hover node
 brush metric -> filter countries
 search and select continents
-help: pan/zoom
+
+help:
+  intro
+
+  data analysis: 
+    dim reduction
+    tda
+    latent space
+    preserve multidimensional space structure in 2d space
+    -> kepler mapper
+
+  data sources:
+    wdpv
+    social progress index
+    economic complexity index
+    -> links
+
+  map 
+    pan/zoom
+    click to select country
+    search with comma to compare
+    reset button
+
+  metrics
+    scroll
+    click to select metric
+    search with comma to compare
+    brush ?
+
+  demo filter country -> metrics
+
 data: 
   eci
   spectral clustering
@@ -26951,13 +26980,14 @@ var init_metrics = function init_metrics(data, state, render) {
         width: width,
         height: height
       }
-    }); //let vis_el = select(vis[k].el);
-    //vis_el.on('mousemove', () => {
-    //let d = metric_hit(k, mouse(vis_el.node()), width);
-    //if (!d) return;
-    //state.hovered_node = d.node_id;
-    //render();
-    //})
+    });
+    var vis_el = (0, _d3Selection.select)(vis[k].el);
+    vis_el.on('mousemove', function () {
+      var d = metric_hit(k, (0, _d3Selection.mouse)(vis_el.node()), width);
+      if (!d) return;
+      state.hovered_node = d.node_id;
+      render();
+    });
   });
 };
 
