@@ -27162,6 +27162,8 @@ var init = function init(_ref) {
   el.search_node = (0, _d3Selection.select)('#node-search input');
   el.search_metric = (0, _d3Selection.select)('#metric-search');
   el.reset_zoom = (0, _d3Selection.select)('#reset-zoom');
+  el.help = (0, _d3Selection.select)('#help');
+  el.help_btn = (0, _d3Selection.select)('#help-button');
   el.map_container.on('click', function () {
     return click_map(state);
   });
@@ -27173,6 +27175,12 @@ var init = function init(_ref) {
   });
   el.reset_zoom.on('click', function () {
     return zoom.reset(vis);
+  });
+  el.help_btn.on('click', function () {
+    return el.help.classed('enabled', !el.help.classed('enabled'));
+  });
+  el.help.on('click', function () {
+    return el.help.classed('enabled', false);
   });
   window.addEventListener('resize', resize, false);
 };
