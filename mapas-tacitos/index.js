@@ -27189,7 +27189,7 @@ var init = function init(_ref) {
     return el.help.classed('enabled', !el.help.classed('enabled'));
   });
   el.help.on('click', function () {
-    return el.help.classed('enabled', false);
+    if (event.target.tagName.toLowerCase() !== 'a') el.help.classed('enabled', false);
   });
   window.addEventListener('resize', resize, false);
 };
@@ -27311,7 +27311,7 @@ var node_hover = function node_hover(vis, state, nodes) {
 
 var node_out = function node_out(vis, state) {
   if (!state.hovered_node) return;
-  el.map.style('cursor', 'default');
+  el.map.style('cursor', 'move');
   var id = state.hovered_node;
   state.hovered_node = null;
   return id;

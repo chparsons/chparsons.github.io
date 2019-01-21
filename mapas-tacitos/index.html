@@ -16,7 +16,7 @@
 
       <div id="topbar">
 
-        <div id="title">mapas tácitos</div>
+        <div class="title">mapas tácitos</div>
         <div id="node-search">
           <input type="text" placeholder="Search for multiple countries..."/>
         </div>
@@ -31,41 +31,74 @@
       </div>
 
       <div id="bottombar">
-        <div id="reset-zoom">⦻</div>
-        <div id="help-button">?</div>
+
+        <svg id="reset-zoom" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M0 0h24v24H0z"/></defs><clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath><path clip-path="url(#b)" d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42 2.89 2.87L15 21h6z"/><path clip-path="url(#b)" fill="none" d="M0 0h24v24H0z"/></svg>
+
+        <svg id="help-button" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg>
+
       </div>
 
       <div id="help">
 
         <div id="help-description">
 
-          <div id="help-description-text">
+          <div class="title">mapas tácitos</div>
 
-            <p>A different world map:</p>
+          <div id="help-map-zoom" class="help-map-box">
 
-            <p>Using a geometric interpretation of data, a high-dimensional space is created from data about countries. Each country is a point in space and each metric is a dimension.</p> 
-            
-            <p>The points in high-dimensional space are projected and embedded in two-dimensions using dimensionality reduction, clustering and topological data analysis. The result is a map that tries to preserve the structure in high-dimensional space. 
+            <div>
+              <svg class="icon-zoom-out" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M0 0h24v24H0z"/></defs><clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath><path clip-path="url(#b)" d="M15 3l2.3 2.3-2.89 2.87 1.42 1.42L18.7 6.7 21 9V3zM3 9l2.3-2.3 2.87 2.89 1.42-1.42L6.7 5.3 9 3H3zm6 12l-2.3-2.3 2.89-2.87-1.42-1.42L5.3 17.3 3 15v6zm12-6l-2.3 2.3-2.87-2.89-1.42 1.42 2.89 2.87L15 21h6z"/><path clip-path="url(#b)" fill="none" d="M0 0h24v24H0z"/></svg>
+              <span>Navigate the map</span> 
+            </div>
 
-            <p>A new world map with different borders and regions. A different geography of people, lives and ties.</p>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M13 1.07V9h7c0-4.08-3.05-7.44-7-7.93zM4 15c0 4.42 3.58 8 8 8s8-3.58 8-8v-4H4v4zm7-13.93C7.05 1.56 4 4.92 4 9h7V1.07z"/></svg>
+              <span>with your mouse/wheel</span> 
+            </div>
+
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24"><defs><path id="a" d="M0 0h24v24H0V0z"/></defs><clipPath id="b"><use xlink:href="#a" overflow="visible"/></clipPath><path d="M9 11.24V7.5C9 6.12 10.12 5 11.5 5S14 6.12 14 7.5v3.74c1.21-.81 2-2.18 2-3.74C16 5.01 13.99 3 11.5 3S7 5.01 7 7.5c0 1.56.79 2.93 2 3.74zm9.84 4.63l-4.54-2.26c-.17-.07-.35-.11-.54-.11H13v-6c0-.83-.67-1.5-1.5-1.5S10 6.67 10 7.5v10.74l-3.43-.72c-.08-.01-.15-.03-.24-.03-.31 0-.59.13-.79.33l-.79.8 4.94 4.94c.27.27.65.44 1.06.44h6.79c.75 0 1.33-.55 1.44-1.28l.75-5.27c.01-.07.02-.14.02-.2 0-.62-.38-1.16-.91-1.38z" clip-path="url(#b)"/></svg>
+              <span>or touch/pinch</span>
+            </div>
 
           </div>
 
-          <div id="help-description-credits">
+          <div id="help-map-zoom-reset" class="help-map-box">
+            <div>Reset the view with this button</div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"/><path d="M16.01 11H4v2h12.01v3L20 12l-3.99-4z"/></svg>
+          </div>
 
-            <p>Many thanks to the people that created the open-source tools and data sources used in this project</p>
+          <div id="help-description-content">
 
-            <p>Tools:</p>
-            <p>Kepler Mapper for TDA https://kepler-mapper.scikit-tda.org/</p>
-            <p>https://scikit-learn.org/</p>
-            <p>https://pandas.pydata.org/</p>
-            <p>https://d3js.org/</p>
-            <p>https://lodash.com/</p>
+            <div id="help-description-text">
 
-            <p>Data:</p>
-            <p>World Data Visualization Prize (dataset: What Makes A "Good" Government?) http://bit.ly/WDVP-Dataset2</p>
-            <p>Social Progress Index https://www.socialprogress.org</p>
-            <p>Economic Complexity Index https://atlas.media.mit.edu/en/rankings/country/eci/</p>
+              <p>A different world map from a geometric interpretation of data:</p>
+
+              <p>A high-dimensional space is created from socio-economic data about countries. Each country is a point in space, each metric is a dimension.</p> 
+              
+              <p>Using dimensionality reduction, clustering and topological data analysis, the points in high-dimensional space are projected and embedded in two-dimensions. The result is a map that approximates the shape of the data in high-dimensional space. 
+
+              <p>A new world map with different borders and regions. A geography of people, lives and ties.</p>
+
+            </div>
+
+            <div id="help-description-credits">
+
+              <p>Many thanks to the people that created the open-source tools and data sources used in this project</p>
+
+              <p>Tools:</p>
+              <a href="https://kepler-mapper.scikit-tda.org/" target="_blank">https://kepler-mapper.scikit-tda.org/</a>
+              <a href="https://scikit-learn.org/" target="_blank">https://scikit-learn.org/</a>
+              <a href="https://pandas.pydata.org/" target="_blank">https://pandas.pydata.org/</a>
+              <a href="https://d3js.org/" target="_blank">https://d3js.org/</a>
+              <a href="https://lodash.com/" target="_blank">https://lodash.com/</a>
+
+              <p>Data:</p>
+              <a href="http://bit.ly/WDVP-Dataset2" target="_blank">World Data Visualization Prize (dataset: What Makes A "Good" Government?)</a>
+              <a href="https://www.socialprogress.org" target="_blank">Social Progress Index</a>
+              <a href="https://atlas.media.mit.edu/en/rankings/country/eci/" target="_blank">Economic Complexity Index</a>
+
+            </div>
 
           </div>
 
