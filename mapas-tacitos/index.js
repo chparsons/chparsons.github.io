@@ -26632,7 +26632,7 @@ var init = function init(data) {
   };
 
   var update = function update() {
-    map_data = _map.default.update(vis, state, _zoom.default, data, _objectSpread({}, _config.map_padding, {
+    map_data = _map.default.update(data, vis, state, _zoom.default, _objectSpread({}, _config.map_padding, {
       right: (0, _d3Selection.select)('#sidebar').node().offsetWidth + _config.map_padding.right
     }));
 
@@ -26678,7 +26678,7 @@ var init = function init(data) {
 
   _zoom.default.init(update_render);
 
-  _map.default.init();
+  _map.default.init(data);
 
   _metrics.default.init(data, state, render);
 
@@ -26711,14 +26711,12 @@ var _canvas = require("./canvas");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var color_scale;
+var nodes, clusters, links, color_scale;
 
-var init = function init() {
+var init = function init(data) {
   color_scale = (0, _d3Scale.scaleOrdinal)(_d3ScaleChromatic.schemeDark2); //.slice(0,schemeDark2.length-1))
-};
 
-var update = function update(vis, state, zoom, data, pad) {
-  var nodes = (0, _lodash.default)(data.map.nodes).map(function (cluster) {
+  nodes = (0, _lodash.default)(data.map.nodes).map(function (cluster) {
     return cluster.items.map(function (d) {
       return {
         'projected': d.projected,
@@ -26745,19 +26743,7 @@ var update = function update(vis, state, zoom, data, pad) {
       })
     };
   }).uniqBy('id').value();
-  var metric = state.hovered_metric || state.selected_metric;
-  var rscale = (0, _metrics.scale_node_size_by_metric)(data, metric);
-
-  var _scale_xy = scale_xy(vis, zoom, nodes, pad),
-      xscale = _scale_xy.xscale,
-      yscale = _scale_xy.yscale;
-
-  nodes.forEach(function (d) {
-    d.x_render = xscale(d.x);
-    d.y_render = yscale(d.y);
-    d.radius = rscale(d);
-  });
-  var clusters = data.map.nodes.map(function (d) {
+  clusters = data.map.nodes.map(function (d) {
     return {
       'id': d.cluster_id,
       //'label': _.join(_.map(d.items, 'label'), '\n'),
@@ -26767,29 +26753,52 @@ var update = function update(vis, state, zoom, data, pad) {
       'r': 10,
       'x': d.projected_mean[0],
       'y': d.projected_mean[1],
-      'x_render': xscale(d.projected_mean[0]),
-      'y_render': yscale(d.projected_mean[1]),
       'hull': (0, _d3Polygon.polygonHull)(_lodash.default.map(d.items, 'projected')).map(function (h) {
         return {
           x: h[0],
-          y: h[1],
-          x_render: xscale(h[0]),
-          y_render: yscale(h[1])
+          y: h[1]
         };
       })
     };
   });
-  var links = data.map.links.map(function (d) {
+  links = data.map.links.map(function (d) {
     return {
       source: clusters[d.source],
       target: clusters[d.target]
     };
   });
+};
+
+var update = function update(data, vis, state, zoom, pad) {
+  var metric = state.hovered_metric || state.selected_metric;
+  var rscale = (0, _metrics.scale_node_size_by_metric)(data, metric);
+
+  var _scale_xy = scale_xy(vis, zoom, nodes, pad),
+      xscale = _scale_xy.xscale,
+      yscale = _scale_xy.yscale;
+
+  scale_nodes(nodes, clusters, xscale, yscale, rscale);
   return {
     nodes: nodes,
     links: links,
     clusters: clusters
   };
+};
+
+var scale_nodes = function scale_nodes(nodes, clusters, xscale, yscale, rscale) {
+  nodes.forEach(function (d) {
+    d.x_render = xscale(d.x);
+    d.y_render = yscale(d.y);
+    d.radius = rscale(d);
+  });
+  clusters.forEach(function (d) {
+    d.x_render = xscale(d.x);
+    d.y_render = yscale(d.y);
+    d.hull.forEach(function (h) {
+      h.x_render = xscale(h.x);
+      h.y_render = yscale(h.y);
+    });
+  });
 };
 
 var scale_xy = function scale_xy(vis, zoom, nodes, pad) {
