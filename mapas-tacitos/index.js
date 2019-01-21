@@ -26576,33 +26576,6 @@ brush metric -> filter countries
 search and select continents
 
 help:
-  intro
-
-  data analysis: 
-    dim reduction
-    tda
-    latent space
-    preserve multidimensional space structure in 2d space
-    -> kepler mapper
-
-  data sources:
-    wdpv
-    social progress index
-    economic complexity index
-    -> links
-
-  map 
-    pan/zoom
-    click to select country
-    search with comma to compare
-    reset button
-
-  metrics
-    scroll
-    click to select metric
-    search with comma to compare
-    brush ?
-
   demo filter country -> metrics
 
 data: 
