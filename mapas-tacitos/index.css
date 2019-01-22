@@ -62,7 +62,7 @@ a:hover {
   left: 0;
   display: flex;
   align-items: center;
-  padding: 20px 0px;
+  padding-bottom: 20px;
   justify-content: flex-end;
   width: 80%;
 }
@@ -76,15 +76,37 @@ a:hover {
   fill: black;
 }
 
+.search-box {
+  display: flex;
+  pointer-events: all;
+  align-items: center;
+  position: relative;
+}
+
+.search-box input {
+  width: 100%;
+}
+
+.search-box-clear {
+  position: absolute;
+  right: 0;
+  margin: 0px 6px;
+  cursor: pointer;
+  color: #999;
+  display: none;
+}
+
+.search-box-clear.enabled {
+  display: block;
+}
+
+.search-box-clear:hover {
+  color: black;
+}
+
 #node-search { 
   width: 30%;
   margin: 10px;
-  display: flex;
-  pointer-events: all;
-}
-
-#node-search input { 
-  width: 100%;
 }
 
 #sidebar {
@@ -110,6 +132,7 @@ a:hover {
 #metrics {
   overflow: hidden;
   color: #444;
+  margin-top: 60px;
 }
 
 #metrics.hovered {
@@ -117,13 +140,24 @@ a:hover {
 }
 
 #metric-search {
-  margin: 20px 8px;
+  position: fixed;
+  height: 60px;
+  width: 18%;
+  margin-left: 10px;
 }
 
-#metric-selected, #node-selected {
+#metric-selected.enabled, 
+#node-selected.enabled {
   cursor: pointer;
   margin: 10px;
   pointer-events: all;
+  background-color: #5f9ea04d;
+  padding: 6px;
+}
+
+#metric-selected:hover, 
+#node-selected:hover {
+  background-color: #5f9ea066;
 }
 
 .metric {
@@ -279,7 +313,7 @@ a:hover {
 #help-map-zoom {
   top: 70%;
   left: 40%;
-  width: 200px;
+  /*width: 200px;*/
   flex-direction: column;
   align-items: flex-start;
 }

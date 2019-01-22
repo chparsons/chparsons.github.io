@@ -26427,13 +26427,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.labels_display_levels = exports.node_radius = exports.map_font = exports.map_padding = void 0;
-//export const lower_better = [
-//'gini', 'unemployment', 'political rights score', 'civil liberties score',
-//'undernourishment', 'maternal mortality', 'child mortality', 'child stunting', 'deaths', 'rural open defecation', 'household air pollution', 'homicide', 'political killings', 'perceived criminality', 'traffic deaths', 'premature deaths', 'outdoor air pollution', 'greenhouse', 'vulnerable employment', 'discrimination'
-//]
-//export const inversed_metrics = [
-//'political rights score', 'civil liberties score'
-//]
 var map_padding = {
   right: 60,
   left: 60,
@@ -26456,7 +26449,7 @@ var node_radius = {
 exports.node_radius = node_radius;
 var labels_display_levels = [{
   scale: 1.6,
-  skip: 8
+  skip: 7
 }, {
   scale: 2.4,
   skip: 4
@@ -26962,14 +26955,13 @@ var init_metrics = function init_metrics(data, state, render) {
         width: width,
         height: height
       }
-    });
-    var vis_el = (0, _d3Selection.select)(vis[k].el);
-    vis_el.on('mousemove', function () {
-      var d = metric_hit(k, (0, _d3Selection.mouse)(vis_el.node()), width);
-      if (!d) return;
-      state.hovered_node = d.node_id;
-      render();
-    });
+    }); //let vis_el = select(vis[k].el);
+    //vis_el.on('mousemove', () => {
+    //let d = metric_hit(k, mouse(vis_el.node()), width);
+    //if (!d) return;
+    //state.hovered_node = d.node_id;
+    //render();
+    //})
   });
 };
 
@@ -26984,9 +26976,13 @@ var update_metrics = function update_metrics(data) {
     var _vis$k = vis[k],
         width = _vis$k.width,
         height = _vis$k.height;
-    metrics_by_name[k] = (0, _lodash.default)(data.metrics.by_name[k].values).map(function (d) {
+    var metric = data.metrics.by_name[k];
+
+    var min = _lodash.default.minBy(metric.values, 'metric_value');
+
+    metrics_by_name[k] = (0, _lodash.default)(metric.values).map(function (d) {
       return !isNaN(d.metric_value) ? d : _objectSpread({}, d, {
-        metric_value: 0
+        metric_value: min.metric_value
       });
     }).sortBy('metric_value').reverse().value();
     xscales[k] = (0, _d3Scale.scaleBand)().domain(_lodash.default.map(metrics_by_name[k], 'node_id')).range([0, width]); //.padding(0.1)
@@ -27030,6 +27026,7 @@ var update_highlighted_nodes = function update_highlighted_nodes(state) {
 };
 
 var render_highlighted_nodes = function render_highlighted_nodes(data, state) {
+  if (_lodash.default.size(highlighted_nodes) < 1) return;
   data.metrics.names.forEach(function (k) {
     var metric = data.metrics.by_name[k];
     var _vis$k3 = vis[k],
@@ -27142,7 +27139,9 @@ var init = function init(_ref) {
   el.selected_metric = (0, _d3Selection.select)('#metric-selected');
   el.selected_node = (0, _d3Selection.select)('#node-selected');
   el.search_node = (0, _d3Selection.select)('#node-search input');
-  el.search_metric = (0, _d3Selection.select)('#metric-search');
+  el.search_node_clear = (0, _d3Selection.select)('#node-search .search-box-clear');
+  el.search_metric = (0, _d3Selection.select)('#metric-search input');
+  el.search_metric_clear = (0, _d3Selection.select)('#metric-search .search-box-clear');
   el.reset_zoom = (0, _d3Selection.select)('#reset-zoom');
   el.help = (0, _d3Selection.select)('#help');
   el.help_btn = (0, _d3Selection.select)('#help-button');
@@ -27200,7 +27199,13 @@ var update = function update(_ref2) {
     } else filter_nodes_delayed(text, map_data, state, update_render);
   });
   el.search_metric.on('keyup', function () {
-    return filter_metrics_delayed(_lodash.default.get(event, 'target.value'), data, state, update_render);
+    filter_metrics_delayed(_lodash.default.get(event, 'target.value'), data, state, update_render);
+  });
+  el.search_node_clear.on('click', function () {
+    return clear_filtered_nodes(map_data, state, update_render);
+  });
+  el.search_metric_clear.on('click', function () {
+    return clear_filtered_metrics(data, state, update_render);
   });
 };
 
@@ -27213,11 +27218,13 @@ var click_map = function click_map(state) {
 
 var filter_metrics = function filter_metrics(text, data, state, update_render) {
   state.filtered_metrics = filter(text, data.metrics.names);
+  el.search_metric_clear.classed('enabled', !_lodash.default.isEmpty(state.filtered_metrics));
   update_render();
 };
 
 var filter_nodes = function filter_nodes(text, map_data, state, update_render) {
   state.filtered_nodes = filter(text, map_data.nodes, 'label');
+  el.search_node_clear.classed('enabled', !_lodash.default.isEmpty(state.filtered_nodes));
   update_render();
 };
 
@@ -27260,6 +27267,11 @@ var remove_filtered_node = function remove_filtered_node(node_id, state) {
 var clear_filtered_nodes = function clear_filtered_nodes(map_data, state, update_render) {
   el.search_node.node().value = '';
   filter_nodes('', map_data, state, update_render);
+};
+
+var clear_filtered_metrics = function clear_filtered_metrics(data, state, update_render) {
+  el.search_metric.node().value = '';
+  filter_metrics('', data, state, update_render);
 };
 
 var filter = function filter(text, list, item_key) {
