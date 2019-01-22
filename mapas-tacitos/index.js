@@ -26234,17 +26234,7 @@ var _math = require("./math");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var show_label_by_scale_fn = function show_label_by_scale_fn(scale) {
-  var skip = _lodash.default.get(_lodash.default.find(_config.labels_display_levels, function (d) {
-    return scale < d.scale;
-  }), 'skip', 0);
-
-  return function (i) {
-    return !(i % skip);
-  };
-};
-
-var render_nodes = function render_nodes(vis, nodes, state, zoom) {
+var render_nodes = function render_nodes(vis, state, zoom, map_data) {
   var ctx = vis.context;
   var width = vis.width,
       height = vis.height;
@@ -26253,7 +26243,8 @@ var render_nodes = function render_nodes(vis, nodes, state, zoom) {
   var filtered_nodes = _lodash.default.map(state.filtered_nodes, 'id');
 
   var has_filtered = !_lodash.default.isEmpty(filtered_nodes);
-  var show_label_by_scale = show_label_by_scale_fn(scale);
+  var rendered_labels = [];
+  var label_margin = label_margin_fn(scale);
 
   var is_filtered = function is_filtered(d) {
     return has_filtered && _lodash.default.includes(filtered_nodes, d.id);
@@ -26267,11 +26258,10 @@ var render_nodes = function render_nodes(vis, nodes, state, zoom) {
     return state.selected_node === d.id;
   };
 
-  var font_size = _config.map_font.base_size;
-  nodes.filter(_lodash.default.negate(is_filtered)).concat(nodes.filter(is_filtered)).forEach(function (d, i) {
+  map_data.nodes.filter(_lodash.default.negate(is_filtered)).concat(map_data.nodes.filter(is_filtered)).forEach(function (d, i) {
     var selected = is_selected(d);
     var highlighted = is_filtered(d) || is_hovered(d);
-    var show_label = d.label && (highlighted || selected || !has_filtered && show_label_by_scale(i));
+    var show_label = d.label && (highlighted || selected || !has_filtered && update_labels_hit(d, map_data, ctx, rendered_labels, label_margin(d)));
     var col;
 
     if (highlighted) {
@@ -26303,11 +26293,12 @@ var render_nodes = function render_nodes(vis, nodes, state, zoom) {
     ctx.stroke();
 
     if (show_label) {
-      ctx.font = "".concat(_config.map_font.weight, " ").concat(font_size, "px ").concat(_config.map_font.family);
+      ctx.font = "".concat(_config.map_font.weight, " ").concat(_config.map_font.size, "px ").concat(_config.map_font.family);
       ctx.fillStyle = col.text.toString();
       ctx.textAlign = 'center';
       ctx.textBaseline = 'bottom';
       ctx.fillText(d.label, x, y - r);
+      rendered_labels.push(d.id);
     }
   });
 };
@@ -26414,6 +26405,53 @@ var compute_size = function compute_size(el) {
     width: parseInt(style.getPropertyValue('width')),
     height: parseInt(style.getPropertyValue('height'))
   };
+}; // labels hit test
+
+
+var label_widths = {}; //cache
+
+var label_margin_fn = function label_margin_fn(scale) {
+  return function (d) {
+    return _lodash.default.get(_lodash.default.find(_config.labels_hit_margins, function (d) {
+      return scale < d.scale;
+    }), 'margin', 0);
+  };
+};
+
+var update_labels_hit = function update_labels_hit(d, map_data, ctx, rendered_labels, margin) {
+  if (d.label && !label_widths[d.id]) label_widths[d.id] = ctx.measureText(d.label).width;
+  if (!d.label || !label_widths[d.id]) return false;
+  var dlabel_w = label_widths[d.id];
+  var h = _config.map_font.size;
+
+  for (var i = 0; i < rendered_labels.length; i++) {
+    var rd = map_data.nodes_by_id[rendered_labels[i]];
+    var rlabel_w = label_widths[rendered_labels[i]];
+    var dlabel_x = d.x_render - dlabel_w / 2;
+    var dlabel_y = d.y_render - d.radius - h / 2;
+    var rlabel_x = rd.x_render - rlabel_w / 2;
+    var rlabel_y = rd.y_render - rd.radius - h / 2;
+    if (hit_labels(dlabel_x, dlabel_y, dlabel_w, h, rlabel_x, rlabel_y, rlabel_w, h, margin)) return false;
+    if (hit_labels(rlabel_x, rlabel_y, rlabel_w, h, dlabel_x, dlabel_y, dlabel_w, h, margin)) return false;
+  }
+
+  return true;
+};
+
+var hit_labels = function hit_labels(ax, ay, aw, ah, bx, by, bw, bh, m) {
+  var al = ax - m;
+  var ar = ax + aw + m;
+  var at = ay - m;
+  var ab = ay + ah + m;
+  var bl = bx - m;
+  var br = bx + bw + m;
+  var bt = by - m;
+  var bb = by + bh + m;
+  var left = al > bl && al < br;
+  var right = ar > bl && ar < br;
+  var top = at > bt && at < bb;
+  var bottom = ab > bt && ab < bb;
+  return (left || right) && (top || bottom);
 };
 
 var elem = function elem(el) {
@@ -26426,7 +26464,7 @@ var elem = function elem(el) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.labels_display_levels = exports.node_radius = exports.map_font = exports.map_padding = void 0;
+exports.labels_hit_margins = exports.node_radius = exports.map_font = exports.map_padding = void 0;
 var map_padding = {
   right: 60,
   left: 60,
@@ -26435,7 +26473,7 @@ var map_padding = {
 };
 exports.map_padding = map_padding;
 var map_font = {
-  base_size: 10,
+  size: 10,
   family: 'Verdana, Arial, sans-serif',
   //family: 'Helvetica Black, Helvetica, Arial, sans-serif',
   weight: 100
@@ -26447,17 +26485,17 @@ var node_radius = {
   hit: 8
 };
 exports.node_radius = node_radius;
-var labels_display_levels = [{
+var labels_hit_margins = [{
   scale: 1.6,
-  skip: 7
+  margin: 8
 }, {
   scale: 2.4,
-  skip: 4
+  margin: 4
 }, {
   scale: 3.2,
-  skip: 2
+  margin: 2
 }];
-exports.labels_display_levels = labels_display_levels;
+exports.labels_hit_margins = labels_hit_margins;
 
 },{}],27:[function(require,module,exports){
 "use strict";
@@ -26564,16 +26602,11 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /*
+TODO
 drag metric -> hover node
 brush metric -> filter countries
 search and select continents
-
-help:
-  demo filter country -> metrics
-
-data: 
-  eci
-  spectral clustering
+help: demo filter country -> metrics
 */
 (0, _data.load)().then(function (data) {
   return init(data);
@@ -26677,7 +26710,7 @@ var _canvas = require("./canvas");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var nodes, clusters, links, color_scale;
+var nodes, nodes_by_id, clusters, links, color_scale;
 
 var init = function init(data) {
   color_scale = (0, _d3Scale.scaleOrdinal)(_d3ScaleChromatic.schemeDark2); //.slice(0,schemeDark2.length-1))
@@ -26709,6 +26742,9 @@ var init = function init(data) {
       })
     };
   }).uniqBy('id').value();
+  nodes_by_id = (0, _lodash.default)(nodes).groupBy('id').transform(function (o, v, k) {
+    return o[k] = v[0];
+  }).value();
   clusters = data.map.nodes.map(function (d) {
     return {
       'id': d.cluster_id,
@@ -26746,6 +26782,7 @@ var update = function update(data, vis, state, zoom, pad) {
   scale_nodes(nodes, clusters, xscale, yscale, rscale);
   return {
     nodes: nodes,
+    nodes_by_id: nodes_by_id,
     links: links,
     clusters: clusters
   };
@@ -26793,21 +26830,18 @@ var scale_xy = function scale_xy(vis, zoom, nodes, pad) {
   };
 };
 
-var render = function render(vis, state, zoom, _ref) {
-  var nodes = _ref.nodes,
-      links = _ref.links,
-      clusters = _ref.clusters;
+var render = function render(vis, state, zoom, map_data) {
   //render_nodes(vis, clusters, state);
   //render_links(vis, links);
-  (0, _canvas.render_nodes)(vis, nodes, state, zoom);
+  (0, _canvas.render_nodes)(vis, state, zoom, map_data);
 
   _lodash.default.forEach(clusters, function (cluster) {
     return (0, _canvas.render_cluster)(vis, cluster);
   });
 };
 
-var node_color = function node_color(d, _ref2) {
-  var opacity = _ref2.opacity;
+var node_color = function node_color(d, _ref) {
+  var opacity = _ref.opacity;
   var fill = (0, _d3Color.color)(color_scale(d.cluster_id));
   var stroke = (0, _d3Color.color)(fill);
   var text = (0, _d3Color.color)(fill);
@@ -26883,6 +26917,8 @@ var _canvas = require("./canvas");
 
 var _d3Color = require("d3-color");
 
+var _d3Drag = require("d3-drag");
+
 var _config = require("./config");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26891,6 +26927,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//import browser from './browser';
 var el;
 var vis = {};
 var xscales = {};
@@ -26904,12 +26941,11 @@ var metric_pad = {
 
 var init = function init(data, state, render) {
   el = (0, _d3Selection.select)('#metrics');
-  el.on('mouseover', function () {
-    return el.classed('hovered', true);
-  });
-  el.on('mouseout', function () {
-    return el.classed('hovered', false);
-  });
+  el.classed('scroll', true); //el.on('mouseover', () => el.classed('scroll', true))
+  //el.on('touchstart', () => el.classed('scroll', true))
+  //el.on('mouseout', () => el.classed('scroll', false))
+  //el.on('touchend', () => el.classed('scroll', false))
+
   var join = el.selectAll('.metric').data(data.metrics.names, function (k) {
     return k;
   });
@@ -26947,26 +26983,42 @@ var render = function render(data, state) {
 };
 
 var init_metrics = function init_metrics(data, state, render) {
-  var width = el.node().offsetWidth - (metric_pad.left + metric_pad.right);
   var height = 25;
+  var width = el.node().offsetWidth - (metric_pad.left + metric_pad.right);
   data.metrics.names.forEach(function (k) {
     vis[k] = (0, _canvas.make_canvas)(metric_el(k).node(), {
       size: {
         width: width,
         height: height
       }
-    }); //let vis_el = select(vis[k].el);
-    //vis_el.on('mousemove', () => {
-    //let d = metric_hit(k, mouse(vis_el.node()), width);
-    //if (!d) return;
-    //state.hovered_node = d.node_id;
-    //render();
-    //})
+    });
+  });
+  init_metrics_hover(state, render);
+};
+
+var init_metrics_hover = function init_metrics_hover(state, render) {
+  //if (browser.is_mobile() || browser.is_tablet())
+  //return;
+  _lodash.default.forEach(vis, function (_ref) {
+    var el = _ref.el,
+        width = _ref.width;
+    (0, _d3Selection.select)(el).call((0, _d3Drag.drag)().container(el).on('drag', function (k) {
+      return hover_metric(k, state, render, el, width);
+    })); //select(el).on('mousemove', k => hover_metric(k, state, render, el, width))
   });
 };
 
-var metric_hit = function metric_hit(k, pt, width) {
-  var metric = metrics_by_name[k];
+var hover_metric = function hover_metric(metric_name, state, render, vis_el, vis_width) {
+  //if (state.selected_metric || state.selected_node)
+  //return;
+  var d = metric_hit(metric_name, (0, _d3Selection.mouse)(vis_el), vis_width);
+  if (!d) return;
+  state.hovered_node = d.node_id;
+  render();
+};
+
+var metric_hit = function metric_hit(metric_name, pt, width) {
+  var metric = metrics_by_name[metric_name];
   var i = parseInt(pt[0] / width * metric.length);
   return metric[i];
 };
@@ -27091,7 +27143,7 @@ var scale_node_size_by_metric = function scale_node_size_by_metric(data, metric_
 
 exports.scale_node_size_by_metric = scale_node_size_by_metric;
 
-},{"./canvas":25,"./config":26,"d3-array":1,"d3-color":3,"d3-scale":13,"d3-selection":15,"lodash":21}],32:[function(require,module,exports){
+},{"./canvas":25,"./config":26,"d3-array":1,"d3-color":3,"d3-drag":5,"d3-scale":13,"d3-selection":15,"lodash":21}],32:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27161,7 +27213,7 @@ var init = function init(_ref) {
     return el.help.classed('enabled', !el.help.classed('enabled'));
   });
   el.help.on('click', function () {
-    if (event.target.tagName.toLowerCase() !== 'a') el.help.classed('enabled', false);
+    if (_d3Selection.event.target.tagName.toLowerCase() !== 'a') el.help.classed('enabled', false);
   });
   window.addEventListener('resize', resize, false);
 };
@@ -27177,7 +27229,7 @@ var update = function update(_ref2) {
     return select_metric(k === state.selected_metric ? null : k);
   }) //.on('click', k => select_metric(k))
   .on('mouseover', function (k) {
-    return hover_metric(k);
+    if (!state.selected_metric) hover_metric(k);
   }).on('mouseout', function (k) {
     return hover_metric(null);
   });
@@ -27189,9 +27241,9 @@ var update = function update(_ref2) {
     return node_out(vis, state);
   });
   el.search_node.on('keyup', function () {
-    var code = _lodash.default.toLower(_lodash.default.get(event, 'code'));
+    var code = _lodash.default.toLower(_lodash.default.get(_d3Selection.event, 'code'));
 
-    var text = _lodash.default.get(event, 'target.value');
+    var text = _lodash.default.get(_d3Selection.event, 'target.value');
 
     if (code === 'enter') {
       select_node(_lodash.default.first(filter(text, map_data.nodes, 'label')));
@@ -27199,7 +27251,7 @@ var update = function update(_ref2) {
     } else filter_nodes_delayed(text, map_data, state, update_render);
   });
   el.search_metric.on('keyup', function () {
-    filter_metrics_delayed(_lodash.default.get(event, 'target.value'), data, state, update_render);
+    filter_metrics_delayed(_lodash.default.get(_d3Selection.event, 'target.value'), data, state, update_render);
   });
   el.search_node_clear.on('click', function () {
     return clear_filtered_nodes(map_data, state, update_render);

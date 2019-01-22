@@ -135,7 +135,7 @@ a:hover {
   margin-top: 60px;
 }
 
-#metrics.hovered {
+#metrics.scroll {
   overflow-y: scroll;
 }
 
@@ -219,18 +219,17 @@ a:hover {
 .help-box {
   position: fixed;
   background-color: rgba(0,0,0,0.7);
-  padding: 10px;
-}
-
-.help-box {
-  display: flex;
-  align-items: center;
+  padding: 4px 10px;
 }
 
 .help-box div {
   display: flex;
   align-items: center;
   margin-right: 3px;
+}
+
+.help-box > div {
+  margin: 6px 0px;
 }
 
 .help-box .help-icon {
@@ -248,15 +247,21 @@ a:hover {
   fill: CadetBlue;
 }
 
-.help-arrow.top-right {
+.help-arrow.top-right-to-right {
   right: -20px;
   top: -11px;
 }
 
-.help-arrow.top-left {
+.help-arrow.top-left-to-left {
   transform: rotate(180deg);
   left: -20px;
   top: -11px;
+}
+
+.help-arrow.bottom-left-to-bottom {
+  transform: rotate(90deg);
+  left: -11px;
+  bottom: -20px;
 }
 
 #help-description {
@@ -268,7 +273,7 @@ a:hover {
   left: 0;
   display: flex;
   flex-direction: column;
-  font-size: 14px; 
+  font-size: 16px; 
 }
 
 #help-description-content {
@@ -291,31 +296,22 @@ a:hover {
 }
 
 #help-select-node {
-  top: 30%;
+  top: 25%;
   left: 55%;
 }
 
 #help-metrics-panel {
   top: 45%;
   right: calc(20% + 20px);
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 #help-metrics-panel .icon-scroll {
   transform: rotate(90deg);
 }
 
-#help-metrics-panel-title {
-  margin-bottom: 6px;
-}
-
 #help-map-zoom {
   top: 70%;
   left: 40%;
-  /*width: 200px;*/
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 #help-map-zoom .icon-navigate {
@@ -327,11 +323,7 @@ a:hover {
   transform: rotate(-60deg);
   position: absolute;
   left: -4px;
-  bottom: 15px;
-}
-
-#help-map-zoom div {
-  margin: 6px 0px;
+  bottom: 9px;
 }
 
 #help-map-zoom .help-icon {
@@ -352,7 +344,6 @@ a:hover {
 #help-search {
   top: 30px;
   left: 60%;
-  padding: 6px 10px;
   width: 120px;
 }
 
