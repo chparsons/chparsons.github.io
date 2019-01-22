@@ -26480,9 +26480,15 @@ var map_font = {
 };
 exports.map_font = map_font;
 var node_radius = {
-  min: 2,
-  max: 8,
-  hit: 8
+  min: function min() {
+    return window.innerWidth < 800 ? 1 : 2;
+  },
+  max: function max() {
+    return 8;
+  },
+  hit: function hit() {
+    return 8;
+  }
 };
 exports.node_radius = node_radius;
 var labels_hit_margins = [{
@@ -27118,8 +27124,10 @@ var _default = {
 exports.default = _default;
 
 var scale_node_size_by_metric = function scale_node_size_by_metric(data, metric_name) {
-  var rmin = _config.node_radius.min;
-  var rmax = _config.node_radius.max;
+  var rmin = _config.node_radius.min();
+
+  var rmax = _config.node_radius.max();
+
   if (!metric_name) return function () {
     return rmin;
   };
@@ -27360,7 +27368,8 @@ var node_over = function node_over(id, vis, state) {
 };
 
 var node_hit = function node_hit(pt, nodes, vis) {
-  var rhit = _config.node_radius.hit;
+  var rhit = _config.node_radius.hit();
+
   var ptr = {
     x_render: pt[0],
     y_render: pt[1]
