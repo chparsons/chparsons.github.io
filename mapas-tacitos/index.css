@@ -281,6 +281,11 @@ a:hover {
   top: -11px;
 }
 
+.help-arrow.bottom-right-to-right {
+  right: -20px;
+  bottom: -11px;
+}
+
 .help-arrow.top-left-to-left {
   transform: rotate(180deg);
   left: -20px;

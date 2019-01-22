@@ -26609,10 +26609,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 /*
 TODO
-drag metric -> hover node
-brush metric -> filter countries
-search and select continents
-help: demo filter country -> metrics
+  drag metric -> hover node
+  brush metric -> filter countries
+  search and select continents
+  help: demo filter country -> metrics
+v2
+  fixed tsne vs topology network
+  timeseries
 */
 (0, _data.load)().then(function (data) {
   return init(data);
