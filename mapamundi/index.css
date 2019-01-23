@@ -245,6 +245,14 @@ a:hover {
   display: block;
 }
 
+@media 
+screen and (max-width: 760px), 
+screen and (max-height: 600px) {
+  .help-box {
+    display: none;
+  }
+}
+
 .help-box {
   position: fixed;
   background-color: rgba(0,0,0,0.7);
@@ -393,27 +401,27 @@ a:hover {
   }
 }
 
-@media screen and (orientation:portrait) {
-  #screen-rotation {
-    display: flex;
-  }
-}
+/*@media screen and (orientation:portrait) {*/
+  /*#screen-rotation {*/
+    /*display: flex;*/
+  /*}*/
+/*}*/
 
-@media screen and (orientation:landscape) {
-  @media (max-width: 800px) {
-    #screen-size {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 2.5vw;
-      color: black;
-      position: fixed;
-      width: 100%;
-      height: 20px;
-      left: 0;
-      bottom: 0;
-      background-color: rgba(255,255,255,0.8);
-    }
+@media 
+screen and (max-width: 760px), 
+screen and (max-height: 600px) {
+  #screen-size {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5vw;
+    color: black;
+    position: fixed;
+    width: 100%;
+    height: 20px;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(255,255,255,0.8);
   }
 }
 
