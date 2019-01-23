@@ -309,7 +309,7 @@ screen and (max-height: 600px) {
 #help-description {
   background-color: rgba(0,0,0,0.7);
   position: fixed;
-  width: 300px;
+  width: 320px;
   height: 100%;
   top: 0;
   left: 0;
@@ -353,7 +353,7 @@ screen and (max-height: 600px) {
 
 #help-map-zoom {
   top: 70%;
-  left: 40%;
+  left: calc(300px + 10%);
 }
 
 #help-map-zoom .icon-navigate {

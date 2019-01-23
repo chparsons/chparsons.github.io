@@ -86,7 +86,7 @@ function load_lang( callback )
 {
     $.ajax({ 
         url: '//ipinfo.io',
-        //url: 'http://api.hostip.info/country.php',
+        //url: '//api.hostip.info/country.php',
         type: 'GET',
         dataType: "json",
         timeout: 3000
@@ -136,15 +136,15 @@ function init_sections()
     //$sidebar.find('.back-ico').hide();    
   });
 
-  sections.on( 'camara_lucida:enter', function() 
-  { 
-    $('.towtruck.btn').hide(); 
-  });
+  //sections.on( 'camara_lucida:enter', function() 
+  //{ 
+    //$('.towtruck.btn').hide(); 
+  //});
 
-  sections.on( 'camara_lucida:exit', function() 
-  { 
-    $('.towtruck.btn').show(); 
-  });
+  //sections.on( 'camara_lucida:exit', function() 
+  //{ 
+    //$('.towtruck.btn').show(); 
+  //});
 
   //::::::::::::::::::::::::::::::::::::::::::::
   //TODO show coinbase.....do it well......

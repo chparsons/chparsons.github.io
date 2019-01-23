@@ -26234,6 +26234,9 @@ var _math = require("./math");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+//import { geoPath } from 'd3-geo';
+//import { scaleSequential, scaleLinear } from 'd3-scale';
+//import { interpolateYlGnBu } from 'd3-scale-chromatic';
 var render_nodes = function render_nodes(vis, state, zoom, map_data) {
   var ctx = vis.context;
   var width = vis.width,
@@ -26333,7 +26336,7 @@ var render_links = function render_links(vis, links) {
     ctx.lineTo(d.target.x_render, d.target.y_render);
   });
   ctx.lineWidth = 0.4;
-  ctx.strokeStyle = 'rgba(0,0,0,0.2)';
+  ctx.strokeStyle = 'rgba(0,0,0,0.25)';
   ctx.stroke();
 };
 
@@ -26405,7 +26408,26 @@ var compute_size = function compute_size(el) {
     width: parseInt(style.getPropertyValue('width')),
     height: parseInt(style.getPropertyValue('height'))
   };
-}; // labels hit test
+}; // contours
+//let contours_path = geoPath();
+//let contours_color = scaleSequential(interpolateYlGnBu)
+//let contours_color_t = scaleLinear()
+//.domain([1, 0])
+//.range([0.4, 0.6])
+//export const render_contours = (vis, contours) => {
+//let ctx = vis.context;
+//contours_path.context(ctx);
+////let len = contours.length;
+//ctx.strokeStyle = '#aaa';
+//contours.forEach((d,i) => {
+//ctx.beginPath();
+////ctx.fillStyle = contours_color(contours_color_t(i/len))
+//contours_path(d)
+////ctx.fill();
+//ctx.stroke();
+//})
+//}
+// labels hit test
 
 
 var label_widths = {}; //cache
@@ -26469,7 +26491,7 @@ var map_padding = {
   right: 60,
   left: 60,
   top: 100,
-  bottom: 60
+  bottom: 80
 };
 exports.map_padding = map_padding;
 var map_font = {
@@ -26640,9 +26662,7 @@ var init = function init(data) {
   };
 
   var update = function update() {
-    map_data = _map.default.update(data, vis, state, _zoom.default, _objectSpread({}, _config.map_padding, {
-      right: (0, _d3Selection.select)('#sidebar').node().offsetWidth + _config.map_padding.right
-    }));
+    map_data = _map.default.update(map_data, data, vis, state, _zoom.default, pad());
 
     _metrics.default.update(data, state);
 
@@ -26686,11 +26706,17 @@ var init = function init(data) {
 
   _zoom.default.init(update_render);
 
-  _map.default.init(data);
+  map_data = _map.default.init(data, vis, state, _zoom.default, pad());
 
   _metrics.default.init(data, state, render);
 
   update_render();
+};
+
+var pad = function pad() {
+  return _objectSpread({}, _config.map_padding, {
+    right: (0, _d3Selection.select)('#sidebar').node().offsetWidth + _config.map_padding.right
+  });
 };
 
 },{"./canvas":25,"./config":26,"./data":27,"./map":29,"./metrics":31,"./ui":32,"./zoom":33,"d3-selection":15,"lodash":21,"raf":24}],29:[function(require,module,exports){
@@ -26719,12 +26745,11 @@ var _canvas = require("./canvas");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var nodes, nodes_by_id, clusters, links, color_scale;
+//import { contourDensity } from 'd3-contour';
+var init = function init(data, vis, state, zoom, pad) {
+  var color_scale = (0, _d3Scale.scaleOrdinal)(_d3ScaleChromatic.schemeDark2); //.slice(0,schemeDark2.length-1))
 
-var init = function init(data) {
-  color_scale = (0, _d3Scale.scaleOrdinal)(_d3ScaleChromatic.schemeDark2); //.slice(0,schemeDark2.length-1))
-
-  nodes = (0, _lodash.default)(data.map.nodes).map(function (cluster) {
+  var nodes = (0, _lodash.default)(data.map.nodes).map(function (cluster) {
     return cluster.items.map(function (d) {
       return {
         'projected': d.projected,
@@ -26746,20 +26771,20 @@ var init = function init(data) {
       'cluster_id': d.cluster_id,
       'x': d.projected[0],
       'y': d.projected[1],
-      'color': node_color(d, {
+      'color': node_color(d, color_scale, {
         opacity: 0.7
       })
     };
   }).uniqBy('id').value();
-  nodes_by_id = (0, _lodash.default)(nodes).groupBy('id').transform(function (o, v, k) {
+  var nodes_by_id = (0, _lodash.default)(nodes).groupBy('id').transform(function (o, v, k) {
     return o[k] = v[0];
   }).value();
-  clusters = data.map.nodes.map(function (d) {
+  var clusters = data.map.nodes.map(function (d) {
     return {
       'id': d.cluster_id,
       //'label': _.join(_.map(d.items, 'label'), '\n'),
-      'color': node_color(d, {
-        opacity: 0.16
+      'color': node_color(d, color_scale, {
+        opacity: 0.2
       }),
       'r': 10,
       'x': d.projected_mean[0],
@@ -26772,15 +26797,39 @@ var init = function init(data) {
       })
     };
   });
-  links = data.map.links.map(function (d) {
+  var links = data.map.links.map(function (d) {
     return {
       source: clusters[d.source],
       target: clusters[d.target]
     };
   });
+  update({
+    nodes: nodes,
+    nodes_by_id: nodes_by_id,
+    links: links,
+    clusters: clusters
+  }, data, vis, state, zoom, pad); //calc once
+  //let contours = contourDensity()
+  //.x(d => d.x_render)
+  //.y(d => d.y_render)
+  //.size([vis.width, vis.height])
+  ////.bandwidth(30)
+  ////.thresholds(16)
+  //(nodes)
+
+  return {
+    nodes: nodes,
+    nodes_by_id: nodes_by_id,
+    links: links,
+    clusters: clusters
+  };
 };
 
-var update = function update(data, vis, state, zoom, pad) {
+var update = function update(map_data, data, vis, state, zoom, pad) {
+  var nodes = map_data.nodes,
+      nodes_by_id = map_data.nodes_by_id,
+      links = map_data.links,
+      clusters = map_data.clusters;
   var metric = state.hovered_metric || state.selected_metric;
   var rscale = (0, _metrics.scale_node_size_by_metric)(data, metric);
 
@@ -26840,22 +26889,31 @@ var scale_xy = function scale_xy(vis, zoom, nodes, pad) {
 };
 
 var render = function render(vis, state, zoom, map_data) {
-  //render_nodes(vis, clusters, state);
-  (0, _canvas.render_links)(vis, links);
-  (0, _canvas.render_nodes)(vis, state, zoom, map_data);
+  //render_contours(vis, map_data.contours);
+  //render_nodes(vis, map_data.clusters, state);
+  (0, _canvas.render_links)(vis, map_data.links);
 
-  _lodash.default.forEach(clusters, function (cluster) {
+  _lodash.default.forEach(map_data.clusters, function (cluster) {
     return (0, _canvas.render_cluster)(vis, cluster);
   });
+
+  (0, _canvas.render_nodes)(vis, state, zoom, map_data);
 };
 
-var node_color = function node_color(d, _ref) {
-  var opacity = _ref.opacity;
+var node_color = function node_color(d, color_scale, _ref) {
+  var opacity = _ref.opacity,
+      brighter = _ref.brighter;
   var fill = (0, _d3Color.color)(color_scale(d.cluster_id));
   var stroke = (0, _d3Color.color)(fill);
   var text = (0, _d3Color.color)(fill);
   fill.opacity = opacity;
   stroke.opacity = opacity * 2;
+
+  if (brighter) {
+    fill = fill.brighter(brighter);
+    stroke = stroke.brighter(brighter);
+  }
+
   return {
     fill: fill,
     stroke: stroke,

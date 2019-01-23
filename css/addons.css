@@ -21,11 +21,11 @@ iframe[id*="coinbase_button"] {
   /*text-decoration: none;*/
 /*}*/
 
-.towtruck.btn {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-}
+/*.towtruck.btn {*/
+  /*position: fixed;*/
+  /*top: 0px;*/
+  /*right: 0px;*/
+/*}*/
 
 #google_translate_element {
   position: fixed;
