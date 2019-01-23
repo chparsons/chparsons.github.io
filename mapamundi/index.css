@@ -133,10 +133,10 @@ a:hover {
 }
 
 .title {
-  width: 300px;
+  /*width: 300px;*/
+  /*text-align: center;*/
   font-size: 40px;
-  margin: 10px 0px;
-  text-align: center;
+  margin: 10px 16px;
   color: #333;
 }
 

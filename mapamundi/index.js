@@ -26841,7 +26841,7 @@ var scale_xy = function scale_xy(vis, zoom, nodes, pad) {
 
 var render = function render(vis, state, zoom, map_data) {
   //render_nodes(vis, clusters, state);
-  //render_links(vis, links);
+  (0, _canvas.render_links)(vis, links);
   (0, _canvas.render_nodes)(vis, state, zoom, map_data);
 
   _lodash.default.forEach(clusters, function (cluster) {
