@@ -27203,7 +27203,7 @@ var scale_node_size_by_metric = function scale_node_size_by_metric(data, metric_
   //? [rmax, rmin]
   //: [rmin, rmax]
 
-  var rscale = (0, _d3Scale.scaleLinear)().domain(domain).range(range);
+  var rscale = (0, _d3Scale.scaleSqrt)().domain(domain).range(range);
   return function (d) {
     var metric_value = metric.by_node_id[d.id];
     return isNaN(metric_value) ? 0 : rscale(metric_value);
