@@ -26489,9 +26489,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.labels_hit_margins = exports.node_radius = exports.map_font = exports.map_padding = void 0;
 var map_padding = {
   right: 0.05,
-  left: 0.05,
+  left: 0.1,
   top: 0.12,
-  bottom: 0.1
+  bottom: 0.15
 };
 exports.map_padding = map_padding;
 var map_font = {

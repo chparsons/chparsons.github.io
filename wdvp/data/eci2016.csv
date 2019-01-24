@@ -1,0 +1,127 @@
+Country,Code,Economic Complexity Index
+Angola,afago,-1.10671
+Cote d'Ivoire,afciv,-1.51738
+Cameroon,afcmr,-1.65947
+Republic of the Congo,afcog,-1.28535
+Algeria,afdza,-0.715288
+Egypt,afegy,-0.0702666
+Ethiopia,afeth,-1.06155
+Gabon,afgab,-1.432
+Ghana,afgha,-1.41096
+Guinea,afgin,-1.9858
+Kenya,afken,-0.658893
+Liberia,aflbr,-0.7467
+Libya,aflby,-1.05141
+Morocco,afmar,-0.75663
+Madagascar,afmdg,-1.32037
+Mali,afmli,-0.885402
+Mozambique,afmoz,-1.61157
+Mauritania,afmrt,-1.59462
+Mauritius,afmus,-0.245542
+Malawi,afmwi,-1.6499
+Nigeria,afnga,-1.54415
+Sudan,afsdn,-1.43747
+Senegal,afsen,-0.53243
+Tunisia,aftun,0.0973685
+Tanzania,aftza,-1.00641
+Uganda,afuga,-0.44042
+South Africa,afzaf,-0.0292484
+Zambia,afzmb,-1.22629
+Zimbabwe,afzwe,-0.897424
+United Arab Emirates,asare,0.246693
+Azerbaijan,asaze,-0.545569
+Bangladesh,asbgd,-1.22314
+China,aschn,0.911251
+Georgia,asgeo,-0.136839
+Hong Kong,ashkg,0.749425
+Indonesia,asidn,-0.253646
+India,asind,0.236866
+Iran,asirn,-0.389103
+Israel,asisr,1.186
+Jordan,asjor,0.0687142
+Japan,asjpn,2.22938
+Kazakhstan,askaz,-0.140565
+Kyrgyzstan,askgz,-0.0461406
+Cambodia,askhm,-0.860402
+South Korea,askor,1.79864
+Kuwait,askwt,0.128739
+Laos,aslao,-0.988196
+Lebanon,aslbn,0.248075
+Sri Lanka,aslka,-0.579077
+Mongolia,asmng,-1.11654
+Malaysia,asmys,0.865661
+Oman,asomn,-0.00355699
+Pakistan,aspak,-0.666548
+Philippines,asphl,0.434081
+Qatar,asqat,-0.131597
+Saudi Arabia,assau,0.766112
+Singapore,assgp,1.71625
+Syria,assyr,-0.644997
+Thailand,astha,0.671775
+Tajikistan,astjk,-1.07242
+Turkmenistan,astkm,-1.00243
+Turkey,astur,0.404726
+Uzbekistan,asuzb,-0.663603
+Vietnam,asvnm,-0.332587
+Yemen,asyem,-1.46949
+Albania,eualb,-0.487843
+Austria,euaut,1.61209
+Belgium,eubel,1.21917
+Bulgaria,eubgr,0.53637
+Bosnia and Herzegovina,eubih,0.482107
+Belarus,eublr,0.723198
+Switzerland,euche,2.0544
+Czech Republic,eucze,1.57717
+Germany,eudeu,1.95551
+Denmark,eudnk,1.23615
+Spain,euesp,0.841379
+Estonia,euest,1.02913
+Finland,eufin,1.55487
+France,eufra,1.34955
+United Kingdom,eugbr,1.59265
+Greece,eugrc,0.222362
+Croatia,euhrv,0.831182
+Hungary,euhun,1.29993
+Ireland,euirl,1.44421
+Italy,euita,1.21412
+Lithuania,eultu,0.703753
+Latvia,eulva,0.650211
+Moldova,eumda,-0.300825
+Macedonia,eumkd,0.105846
+Netherlands,eunld,1.10655
+Norway,eunor,1.03384
+Poland,eupol,1.14721
+Portugal,euprt,0.555
+Romania,eurou,0.871347
+Russia,eurus,0.467258
+Serbia,eusrb,0.581892
+Slovakia,eusvk,1.28447
+Slovenia,eusvn,1.44667
+Sweden,euswe,1.75485
+Ukraine,euukr,0.455412
+Canada,nacan,0.767588
+Costa Rica,nacri,0.3146
+Cuba,nacub,-0.507612
+Dominican Republic,nadom,-0.352578
+Guatemala,nagtm,-0.392704
+Honduras,nahnd,-0.574449
+Jamaica,najam,-0.26616
+Mexico,namex,0.932908
+Nicaragua,nanic,-1.06876
+Panama,napan,0.441168
+El Salvador,naslv,0.112086
+Trinidad and Tobago,natto,0.00787162
+United States,nausa,1.58101
+Australia,ocaus,-0.16901
+New Zealand,ocnzl,0.371123
+Papua New Guinea,ocpng,-1.74395
+Argentina,saarg,-0.179818
+Bolivia,sabol,-1.09992
+Brazil,sabra,0.229095
+Chile,sachl,-0.216857
+Colombia,sacol,-0.00253314
+Ecuador,saecu,-0.989348
+Peru,saper,-0.68778
+Paraguay,sapry,-0.642897
+Uruguay,saury,0.175781
+Venezuela,saven,-0.803681
