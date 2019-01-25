@@ -26487,18 +26487,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.labels_hit_margins = exports.node_radius = exports.map_font = exports.map_padding = void 0;
-//wdvp
-//export const map_padding = { 
-//right: 0.05,
-//left: 0.1, 
-//top: 0.12,
-//bottom: 0.15
-//}
 var map_padding = {
   right: 0.05,
   left: 0.05,
   top: 0.12,
-  bottom: 0.1
+  bottom: 0.1 //wdvp
+  //export const map_padding = { 
+  //right: 0.05,
+  //left: 0.1, 
+  //top: 0.12,
+  //bottom: 0.15
+  //}
+
 };
 exports.map_padding = map_padding;
 var map_font = {
@@ -26694,10 +26694,13 @@ var init = function init(data) {
     _metrics.default.render(data, state);
   };
 
-  var resize = function resize() {
+  var resize = _lodash.default.debounce(function () {
     vis.resize();
+
+    _metrics.default.resize(data);
+
     update_render();
-  };
+  }, 300);
 
   _ui.default.init({
     vis: vis,
@@ -27030,7 +27033,7 @@ var init = function init(data, state, render) {
     return _lodash.default.capitalize(k);
   });
   join.exit().on('click', null).remove();
-  update_metrics(data); //render_metrics(data);
+  update_metrics(data);
 };
 
 var update = function update(data, state) {
@@ -27049,15 +27052,36 @@ var render = function render(data, state) {
   metrics_els().classed('selected', false);
   metric_el(state.selected_metric).classed('selected', true);
 
-  if (update_highlighted_nodes(state)) {
+  if (update_highlighted_nodes(state) || resize_render_dirty) {
     render_metrics(data);
     render_highlighted_nodes(data, state);
+    resize_render_dirty = false;
   }
 };
 
+var metrics_height = 25;
+
+var metrics_width = function metrics_width(el) {
+  return el.node().offsetWidth - (metric_pad.left + metric_pad.right);
+};
+
+var resize_render_dirty = false;
+
+var resize = function resize(data) {
+  var height = metrics_height;
+  var width = metrics_width(el);
+  data.metrics.names.forEach(function (k) {
+    return vis[k].resize({
+      width: width,
+      height: height
+    });
+  });
+  resize_render_dirty = true;
+};
+
 var init_metrics = function init_metrics(data, state, render) {
-  var height = 25;
-  var width = el.node().offsetWidth - (metric_pad.left + metric_pad.right);
+  var height = metrics_height;
+  var width = metrics_width(el);
   data.metrics.names.forEach(function (k) {
     vis[k] = (0, _canvas.make_canvas)(metric_el(k).node(), {
       size: {
@@ -27185,7 +27209,8 @@ var metrics_els = function metrics_els() {
 var _default = {
   init: init,
   update: update,
-  render: render
+  render: render,
+  resize: resize
 }; //const inverse_size = metric_name => !!_.find(inversed_metrics, f => _.includes(_.toLower(metric_name), f))
 
 exports.default = _default;

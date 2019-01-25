@@ -44,7 +44,6 @@ a:hover {
   left: 0;
   background: radial-gradient(rgba(0,0,0,0), rgba(0,0,0,0.4));
   color: white;
-  z-index: 1;
 }
 
 #container {
@@ -403,6 +402,7 @@ screen and (max-height: 600px) {
   left: -60px;
   bottom: -530px;
   pointer-events: none;
+  z-index: -1;
 }
 
 @media (hover: hover) {
