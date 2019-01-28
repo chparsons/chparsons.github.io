@@ -144,7 +144,7 @@ a:hover {
   margin: 10px 16px;
   color: #333;
   pointer-events: all;
-  cursor: pointer;
+  cursor: help;
 }
 
 #metrics {
