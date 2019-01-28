@@ -26487,18 +26487,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.labels_hit_margins = exports.node_radius = exports.map_font = exports.map_padding = void 0;
-//export const map_padding = { 
-//right: 0.05,
-//left: 0.05, 
-//top: 0.12,
-//bottom: 0.1
-//}
-//wdvp
 var map_padding = {
   right: 0.05,
-  left: 0.1,
+  left: 0.05,
   top: 0.12,
-  bottom: 0.15
+  bottom: 0.1 //wdvp
+  //export const map_padding = { 
+  //right: 0.05,
+  //left: 0.1, 
+  //top: 0.12,
+  //bottom: 0.15
+  //}
+
 };
 exports.map_padding = map_padding;
 var map_font = {
@@ -27136,7 +27136,8 @@ var update_metrics = function update_metrics(data) {
     }).sortBy('metric_value').reverse().value();
     xscales[k] = (0, _d3Scale.scaleBand)().domain(_lodash.default.map(metrics_by_name[k], 'node_id')).range([0, width]); //.padding(0.1)
 
-    yscales[k] = (0, _d3Scale.scaleLinear)().domain((0, _d3Array.extent)(_lodash.default.map(metrics_by_name[k], 'metric_value'))).nice().range([height, 0]);
+    yscales[k] = (0, _d3Scale.scaleLinear)().domain((0, _d3Array.extent)(_lodash.default.map(metrics_by_name[k], 'metric_value'))) //.nice()
+    .range([height, 0]);
   });
 };
 

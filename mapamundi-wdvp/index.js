@@ -27136,7 +27136,8 @@ var update_metrics = function update_metrics(data) {
     }).sortBy('metric_value').reverse().value();
     xscales[k] = (0, _d3Scale.scaleBand)().domain(_lodash.default.map(metrics_by_name[k], 'node_id')).range([0, width]); //.padding(0.1)
 
-    yscales[k] = (0, _d3Scale.scaleLinear)().domain((0, _d3Array.extent)(_lodash.default.map(metrics_by_name[k], 'metric_value'))).nice().range([height, 0]);
+    yscales[k] = (0, _d3Scale.scaleLinear)().domain((0, _d3Array.extent)(_lodash.default.map(metrics_by_name[k], 'metric_value'))) //.nice()
+    .range([height, 0]);
   });
 };
 
