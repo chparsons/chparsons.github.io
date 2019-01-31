@@ -27351,8 +27351,8 @@ var update = function update(_ref2) {
     var text = _lodash.default.get(_d3Selection.event, 'target.value');
 
     if (code === 'enter') {
-      select_node(_lodash.default.get(_lodash.default.first(filter(text, map_data.nodes, 'label')), 'id'));
-      clear_filtered_nodes(map_data, state, update_render);
+      select_node(_lodash.default.get(_lodash.default.last(filter(text, map_data.nodes, 'label')), 'id'));
+      remove_filtered_node(state.selected_node, state);
     } else filter_nodes_delayed(text, map_data, state, update_render);
   });
   el.search_metric.on('keyup', function () {
@@ -27435,13 +27435,15 @@ var filter = function filter(text, list, item_key) {
   text = text.toLowerCase().split(',').map(_lodash.default.trim).filter(function (t) {
     return !_lodash.default.isEmpty(t);
   });
-  return _lodash.default.isEmpty(text) ? null : list.filter(function (d) {
-    var token = item_key ? d[item_key] : d;
-    var match = text.filter(function (t) {
-      return token.toLowerCase().indexOf(t) > -1;
+  return _lodash.default.isEmpty(text) ? null : _lodash.default.flatten(text.map(function (t) {
+    return list.filter(function (d) {
+      return (item_key ? d[item_key] : d).toLowerCase().indexOf(t) > -1;
     });
-    return match.length;
-  });
+  })); //return _.isEmpty(text) ? null : list.filter(d => {
+  //let token = item_key ? d[item_key] : d;
+  //let match = text.filter(t => token.toLowerCase().indexOf(t) > -1);
+  //return match.length;
+  //});
 };
 
 var node_hover = function node_hover(vis, state, nodes) {
