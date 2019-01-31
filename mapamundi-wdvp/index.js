@@ -27351,7 +27351,7 @@ var update = function update(_ref2) {
     var text = _lodash.default.get(_d3Selection.event, 'target.value');
 
     if (code === 'enter') {
-      select_node(_lodash.default.first(filter(text, map_data.nodes, 'label')));
+      select_node(_lodash.default.get(_lodash.default.first(filter(text, map_data.nodes, 'label')), 'id'));
       clear_filtered_nodes(map_data, state, update_render);
     } else filter_nodes_delayed(text, map_data, state, update_render);
   });
