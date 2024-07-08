@@ -1,0 +1,80 @@
+html, body {
+  height: 100%;
+  cursor: default;
+}
+
+body {
+  background: radial-gradient(#fff, #eee);
+  color: #333;
+  font-family: Helvetica Black, Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 100;
+  margin: 0px;
+  overflow: hidden;
+  height: 100%;
+}
+
+#container {
+  width: 100%;
+  height: 100%;
+}
+
+#map {
+  width: calc(100% - 250px);
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+#sidebar {
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #E8E8E8;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+#sidebar .node {
+  margin: 10px;
+}
+
+#errors {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  background-color: #ffeb3b;
+  padding: 20px;
+  font-weight: bold;
+  display: none;
+}
+
+body .dg.ac .dg.main.a {
+  margin-right: 0;
+}
+
+body .dg.ac {
+  left: 0;
+  right: inherit;
+}
+
+/*#ui {*/
+  /*width: 80%;*/
+  /*height: 5%;*/
+  /*position: fixed;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*display: flex;*/
+  /*justify-content: flex-start;*/
+  /*align-items: center;*/
+/*}*/
+
+/*#ui .element {*/
+  /*margin-left: 10px;*/
+/*}*/
+
+
