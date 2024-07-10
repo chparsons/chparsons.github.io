@@ -30,7 +30,10 @@ export default () => <>
     Camara Lucida
   </Typo>
 
-  <Tools tools={tools} />
+  <Tools
+    tools={tools}
+    github='//github.com/chparsons/ofxCamaraLucida'
+  />
 
   <Typo variant='h6' gutterBottom>
     AR Projection mapping research

@@ -35,25 +35,15 @@ export default () => <>
     Qué pasa Riachuelo
   </Typo>
 
-  <Tools tools={tools} />
+  <Tools
+    tools={tools}
+    github='//github.com/garagelab/qpr2'
+  /> 
 
-  <Box sx={{
-    display: 'flex',
-    alignItems: 'center',
-  }}>
-    <Client
-      logo={logo}
-      link='//garagelab.tumblr.com/'
-      />
-    <Box sx={{
-      marginBottom: '20px',
-      marginLeft: '10px',
-    }}>
-      <a href="//github.com/garagelab/qpr2" target="_blank" style={{ color: '#888' }}>
-        <GitHubIcon />
-      </a>
-    </Box>
-  </Box>
+  <Client
+    logo={logo}
+    link='//garagelab.tumblr.com/'
+  />
 
   <Quote sx={{
     marginBottom: '40px',

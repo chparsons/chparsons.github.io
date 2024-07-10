@@ -2,8 +2,9 @@ import React from 'react';
 import Box from '@mui/material/Box';
 import BuildIcon from '@mui/icons-material/Build';
 import Chip from '@mui/material/Chip';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
-export default ({ tools }) =>
+export default ({ tools, github }) =>
   <Box sx={{
     display: 'flex',
     alignItems: 'center',
@@ -27,4 +28,18 @@ export default ({ tools }) =>
         title={d.link}
         clickable={!!d.link}
       /> )}
+
+    { github &&
+      <a
+        href={github}
+        target="_blank"
+        style={{
+          color: '#444',
+          display: 'flex',
+          alignItems: 'center',
+          marginLeft: '5px',
+        }}>
+        <GitHubIcon />
+      </a> }
+
   </Box>

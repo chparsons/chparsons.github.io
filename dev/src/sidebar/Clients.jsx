@@ -12,7 +12,7 @@ import ch from '../assets/logos/crimson.png';
 import gl from '../assets/logos/gl.png';
 import infomous from '../assets/logos/infomous.jpg';
 import rudni from '../assets/logos/rudni.png';
-import cicadas from '../assets/logos/cicadas.jpg';
+import naturkundemuseum from '../assets/logos/naturkundemuseum.jpg';
 import itau from '../assets/logos/itau.jpg';
 import qb9 from '../assets/logos/qb9.png';
 import piksel from '../assets/logos/piksel.jpg';
@@ -57,10 +57,10 @@ const logos = [
   },
   {
     src: rudni,
-    link: '//rudni.com/',
+    link: '//www.rudni.com/',
   },
   {
-    src: cicadas,
+    src: naturkundemuseum,
     link: '//www.naturkundemuseum.uni-halle.de/',
   },
   {

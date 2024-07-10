@@ -13,14 +13,10 @@ import Afluentes from '../projects/afluentes/Afluentes'
 import QPR from '../projects/qpr/QPR'
 import QPBB from '../projects/qpbb/QPBB'
 import TerraIncognita from '../projects/terraincognita/TerraIncognita'
-
-//import ARlab from '../projects/ARlab'
-
-////art
-//import Cicadas from '../projects/Cicadas'
+import Cicadas from '../projects/cicadas/Cicadas'
+import ARlab from '../projects/arlab/ARlab'
 //import Pajaros from '../projects/Pajaros'
 //import Opera from '../projects/Opera'
-////apps
 //import DineroPolitica from '../projects/DineroPolitica'
 
 import mapamundi from '../assets/thumbs/mapamundi.jpg';
@@ -83,6 +79,14 @@ const project_routes = [
   {
     path: '/terraincognita',
     element: <TerraIncognita />,
+  },
+  {
+    path: '/cicadas',
+    element: <Cicadas />,
+  },
+  {
+    path: '/arlab',
+    element: <ARlab />,
   },
 ];
 
@@ -183,21 +187,21 @@ const project_thumbs = [
     image: terraincognita,
   },
 
-  //{
-    //link: '/cicadas',
-    //title: 'Cicadas',
-    //chip: 'Art \\ Music',
-    //description: 'Agent-based simulation of cicadas sounds',
-    //image: cicadas,
-  //},
+  {
+    link: '/cicadas',
+    title: 'Cicadas',
+    chip: 'Art \\ Music',
+    description: 'Agent-based simulation of cicadas',
+    image: cicadas,
+  },
 
-  //{
-    //link: '/arlab',
-    //title: 'AR Lab',
-    //chip: 'R&D',
-    //description: 'Projection mapping research lab',
-    //image: arlab,
-  //},
+  {
+    link: '/arlab',
+    title: 'AR Lab',
+    chip: 'R&D',
+    description: 'Projection mapping research lab',
+    image: arlab,
+  },
 
   {
     link: '/infomous',
