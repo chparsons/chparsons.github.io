@@ -8,6 +8,7 @@ export default ({ tools }) =>
     display: 'flex',
     alignItems: 'center',
     gap: '6px',
+    flexWrap: 'wrap',
     marginBottom: '30px',
   }}>
     <BuildIcon sx={{ fontSize: 16 }} />

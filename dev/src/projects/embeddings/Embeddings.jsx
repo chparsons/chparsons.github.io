@@ -3,12 +3,14 @@ import Grid from '@mui/material/Grid';
 
 import Typo from '../../components/Typo';
 import Tools from '../../components/Tools';
+import Client from '../../components/Client';
 import ItemLink from '../../components/ItemLink';
 import GridBox from '../../components/GridBox';
 import GridImg from '../../components/GridImg';
 import ExploreProject from '../../components/ExploreProject';
 import external_links from '../../config/external_links';
 
+import ch_logo from '../../assets/logos/crimson.png';
 import embeddings_img from '../../assets/embeddings/embeddings.png';
 
 import Text from './Text';
@@ -53,7 +55,9 @@ export default () => <>
   <Typo variant='h3' gutterBottom>
     Embeddings Visualization
   </Typo>
+
   <Tools tools={tools} />
+  <Client logo={ch_logo} />
 
   <GridBox sx={{
     marginBottom: '60px',

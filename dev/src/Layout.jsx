@@ -53,6 +53,7 @@ const Item = ({ title, link, Icon }) =>
   <ListItem key={title} disablePadding>
     <ItemLink link={link}>
       <ListItemButton sx={{
+        paddingLeft: { xs: '8px', sm: '16px' },
         '&:hover': {
           backgroundColor: 'rgba(255, 255, 255, 0.05)',
         },
@@ -73,17 +74,17 @@ const Divider = () =>
     margin: '10px 0',
   }} />
 
-const sidebar_width = '60px';
+const sidebar_width = {
+  xs: '40px',
+  sm: '60px',
+};
 
 export default () => <ThemeProvider theme={theme}>
   <ScrollRestoration />
   <CssBaseline />
   <Box sx={{
     display: 'flex',
-    marginTop: '30px',
-    marginLeft: '40px',
-    marginRight: '30px',
-    //columnGap: '30px',
+    margin: '30px',
   }}>
     <Drawer
       open={true}
@@ -101,7 +102,13 @@ export default () => <ThemeProvider theme={theme}>
     >
       <Sidebar />
     </Drawer>
-    <Box sx={{ flexGrow: 1 }} >
+    <Box sx={{
+      flexGrow: 1,
+      width: {
+        xs: `calc(100% - ${sidebar_width.xs})`,
+        sm: `calc(100% - ${sidebar_width.sm})`,
+      },
+    }}>
       <Outlet />
     </Box>
   </Box>
