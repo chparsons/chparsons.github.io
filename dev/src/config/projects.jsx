@@ -131,13 +131,13 @@ const project_thumbs = [
     //image: wikibrands,
   //},
 
-  {
-    link: '/imageanalysis',
-    title: 'Image Analysis UI',
-    chip: 'DataViz',
-    description: 'Exploratory UI for AI image classification',
-    image: image_analysis,
-  }, 
+  //{
+    //link: '/imageanalysis',
+    //title: 'Image Analysis UI',
+    //chip: 'DataViz',
+    //description: 'Exploratory UI for AI image classification',
+    //image: image_analysis,
+  //}, 
 
   {
     link: '//micromundos.github.io',
