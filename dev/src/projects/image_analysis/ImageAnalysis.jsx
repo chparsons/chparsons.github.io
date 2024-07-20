@@ -41,7 +41,7 @@ export default () => <>
   <Typo variant='h6' gutterBottom sx={{
     marginTop: '40px',
   }}>
-    Exploratory UI for AI image classification
+    Exploratory UI for AI image analysis
   </Typo>
 
   <GridBox>
