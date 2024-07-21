@@ -20,6 +20,7 @@ import arteleku from '../assets/logos/arteleku.jpg';
 import medialab_prado from '../assets/logos/medialab_prado.jpg';
 import videobrasil from '../assets/logos/videobrasil.png';
 import una from '../assets/logos/una.svg';
+import chela from '../assets/logos/chela.svg';
 import moldeo from '../assets/logos/moldeo.png';
 import mmamm from '../assets/logos/mmamm.jpg';
 import vad from '../assets/logos/vad.jpg';
@@ -90,6 +91,10 @@ const logos = [
   {
     src: una,
     link: '//multimedia.una.edu.ar/',
+  },
+  {
+    src: chela,
+    link: '//chela.org.ar/',
   },
   {
     src: moldeo,
