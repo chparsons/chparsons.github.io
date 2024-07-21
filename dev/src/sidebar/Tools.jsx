@@ -16,6 +16,7 @@ import d3 from '../assets/tools/d3.svg';
 import nodejs from '../assets/tools/nodejs.svg';
 import python from '../assets/tools/python.svg';
 import scikitlearn from '../assets/tools/scikitlearn.svg';
+import pandas from '../assets/tools/pandas.svg';
 import hf from '../assets/tools/hf.svg';
 import tf from '../assets/tools/tf.svg';
 import sbert from '../assets/tools/sbert.png';
@@ -57,8 +58,8 @@ const tools = [
       src: nodejs,
       link: '//nodejs.org/',
     },
-  ],
-  [
+  //],
+  //[
     {
       src: python,
       link: '//www.python.org/',
@@ -66,6 +67,10 @@ const tools = [
     {
       src: scikitlearn,
       link: '//scikit-learn.org/',
+    },
+    {
+      src: pandas,
+      link: '//pandas.pydata.org/',
     },
     {
       src: hf,
@@ -83,8 +88,8 @@ const tools = [
       src: networkx,
       link: '//networkx.org/',
     },
-  ],
-  [
+  //],
+  //[
     {
       src: cpp,
       link: '//en.wikipedia.org/wiki/C%2B%2B',
@@ -111,8 +116,8 @@ const tools = [
       src: opengles,
       link: '//www.khronos.org/opengles/',
     },
-  ],
-  [
+  //],
+  //[
     {
       src: opencv,
       link: '//opencv.org/',
